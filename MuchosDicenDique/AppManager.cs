@@ -1,7 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Management;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -15,8 +17,15 @@ namespace MuchosDicenDique
     {
         IPInterfaceProperties ipProps;
         bool ipPropsLoaded;
+        string virtualBoxVersion;
         public AppManager()
         {
+            virtualBoxVersion = "N/A";
+            foreach (ManagementObject program in new ManagementObjectSearcher("SELECT * FROM Win32_Product WHERE name LIKE 'Oracle VM VirtualBox%'").Get())
+            {
+                if (program != null) { virtualBoxVersion = program.GetPropertyValue("Version").ToString(); }
+            }
+            Console.WriteLine(virtualBoxVersion);
             NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && (net.Name == "Wi-Fi" || net.Name == "Ethernet")).ToArray();
             if (returnNet.Length > 0)
             {
@@ -24,6 +33,22 @@ namespace MuchosDicenDique
                 ipPropsLoaded = true;
             }
             else { throw new Exception("Interafaz IP No Encontrada :("); }
+        }
+        public bool isRdInstalled()
+        {
+            ManagementObjectSearcher p = new ManagementObjectSearcher("SELECT * FROM Win32_Product");
+            foreach (ManagementObject program in p.Get())
+            {
+                if (program != null && program.GetPropertyValue("Name") != null && program.GetPropertyValue("Name").ToString().Contains("Microsoft Visual Studio 2012 Remote Debugger"))
+                {
+                    return true;
+                }
+                if (program != null && program.GetPropertyValue("Name") != null)
+                {
+                    Trace.WriteLine(program.GetPropertyValue("Name"));
+                }
+            }
+            return false;
         }
         public string GetNetworkAddress()
         {
@@ -36,7 +61,7 @@ namespace MuchosDicenDique
             return IPs.Length > 0 ? IPs[0].ToString() : "---";
         }
         public enum PingResults { Failed, Unstable, Success };
-        public PingResults PingHost(string nameOrAddress)
+        public PingResults PingHost()
         {
             using (Ping ping = new Ping())
             {
@@ -47,7 +72,7 @@ namespace MuchosDicenDique
                 {
                     for (int i = 0; i < total; i++)
                     {
-                        reply = ping.Send(nameOrAddress);
+                        reply = ping.Send("1.1.1.1");
                         if (reply.Status == IPStatus.Success) { successes++; }
                     }
                 }
