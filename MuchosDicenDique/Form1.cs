@@ -24,7 +24,19 @@ namespace MuchosDicenDique
         {
             Label_IPHost.Text = manager.GetNetworkAddress();
             Label_IPGateway.Text = manager.GetNetworkGateway();
-            Console.WriteLine(manager.GetLastVirtualBoxVersion());
+            Label_Username.Text = manager.GetCurrentUserName();
+            Label_Hostname.Text = manager.GetCurrentHostName();
+            Label_MAC.Text = manager.GetMACAddress();
+            manager.GetCurrentVirtualBoxVersion();
+            if (manager.GetCurrentVirtualBoxVersion() != "N/A")
+            {
+                Label_VBInstalled.Text = "Yes";
+            }
+            else
+            {
+                Label_VBInstalled.Text = "No";
+            }
+            Console.WriteLine(manager.GetWifiSsid());
         }
     }
 }
