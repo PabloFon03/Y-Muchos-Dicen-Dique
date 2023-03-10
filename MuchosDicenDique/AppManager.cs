@@ -39,7 +39,6 @@ namespace MuchosDicenDique
             if (returnNet.Length > 0)
             {
                 NetworkInterface net = returnNet[0];
-                Console.WriteLine(net.Name);
                 ethernetConnection = net.Name == "Ethernet";
                 macAddress = net.GetPhysicalAddress().ToString();
                 ipProps = net.GetIPProperties();
