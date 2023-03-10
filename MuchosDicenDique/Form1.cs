@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MuchosDicenDique
@@ -26,17 +19,52 @@ namespace MuchosDicenDique
             Label_IPGateway.Text = manager.GetNetworkGateway();
             Label_Username.Text = manager.GetCurrentUserName();
             Label_Hostname.Text = manager.GetCurrentHostName();
-            Label_MAC.Text = manager.GetMACAddress();
-            manager.GetCurrentVirtualBoxVersion();
-            if (manager.GetCurrentVirtualBoxVersion() != "N/A")
+            string netName = manager.GetNetworkName();
+            Label_SSIDName.Text = netName;
+            if (netName == "---")
             {
-                Label_VBInstalled.Text = "Yes";
+                Label_SSIDStatus.Text = "Not Connected";
+                Label_SSIDStatus.ForeColor = Color.Red;
             }
             else
             {
-                Label_VBInstalled.Text = "No";
+                Label_SSIDStatus.Text = $"Connected ({(manager.IsConnectedViaEthernet() ? "Ethernet" : "Wi-Fi")})";
+                Label_SSIDStatus.ForeColor = Color.Green;
             }
-            Console.WriteLine(manager.GetWifiSsid());
+            Label_MAC.Text = manager.GetMACAddress();
+            switch (manager.PingHost())
+            {
+                case AppManager.PingResults.Failed:
+                    Label_InternetStatus.Text = "Disconnected";
+                    Label_InternetStatus.ForeColor = Color.Red;
+                    break;
+                case AppManager.PingResults.Unstable:
+                    Label_InternetStatus.Text = "Unstable";
+                    Label_InternetStatus.ForeColor = Color.Goldenrod;
+                    break;
+                case AppManager.PingResults.Success:
+                    Label_InternetStatus.Text = "Connected";
+                    Label_InternetStatus.ForeColor = Color.Green;
+                    break;
+                default:
+                    Label_InternetStatus.Text = "---";
+                    Label_InternetStatus.ForeColor = Color.DarkGray;
+                    break;
+            }
+            string currentVersion = manager.GetCurrentVirtualBoxVersion();
+            string lastVersion = manager.GetLastVirtualBoxVersion();
+            if (currentVersion == "N/A")
+            {
+                Label_VBInstalled.Text = "Not Installed";
+                Label_VBInstalled.ForeColor = Color.Red;
+            }
+            else
+            {
+                Label_VBInstalled.Text = "Installed";
+                Label_VBInstalled.ForeColor = Color.Green;
+            }
+            Label_VBVersion.Text = $"{currentVersion} ({lastVersion})";
+            Label_VBVersion.ForeColor = currentVersion == lastVersion ? Color.Green : currentVersion == "N/A" ? Color.Red : Color.Goldenrod;
         }
     }
 }

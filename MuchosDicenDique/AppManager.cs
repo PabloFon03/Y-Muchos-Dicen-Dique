@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
-using SimpleWifi;
+using Microsoft.WindowsAPICodePack.Net;
 
 namespace MuchosDicenDique
 {
@@ -16,18 +16,11 @@ namespace MuchosDicenDique
         bool ipPropsLoaded;
         string macAddress;
         string virtualBoxVersion;
+        bool ethernetConnection;
         public AppManager()
         {
             LoadVirtualBoxVersion();
-            NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && (net.Name == "Wi-Fi" || net.Name == "Ethernet")).ToArray();
-            if (returnNet.Length > 0)
-            {
-                Console.WriteLine(returnNet[0].Name);
-                macAddress = returnNet[0].GetPhysicalAddress().ToString();
-                ipProps = returnNet[0].GetIPProperties();
-                ipPropsLoaded = true;
-            }
-            else { throw new Exception("Interafaz IP No Encontrada :("); }
+            LoadNetworkData();
         }
         void LoadVirtualBoxVersion()
         {
@@ -39,6 +32,20 @@ namespace MuchosDicenDique
                 Match m = Regex.Match(rawVersion, @"(\d+(?:\.\d+){0,2})");
                 if (m.Success) { virtualBoxVersion = m.Value; }
             }
+        }
+        void LoadNetworkData()
+        {
+            NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && (net.Name == "Wi-Fi" || net.Name == "Ethernet")).ToArray();
+            if (returnNet.Length > 0)
+            {
+                NetworkInterface net = returnNet[0];
+                Console.WriteLine(net.Name);
+                ethernetConnection = net.Name == "Ethernet";
+                macAddress = net.GetPhysicalAddress().ToString();
+                ipProps = net.GetIPProperties();
+                ipPropsLoaded = true;
+            }
+            else { throw new Exception("Interafaz IP No Encontrada :("); }
         }
         public string GetNetworkAddress()
         {
@@ -82,28 +89,11 @@ namespace MuchosDicenDique
         public string GetCurrentUserName() { return Environment.UserName; }
         public string GetCurrentHostName() { return Environment.MachineName; }
         public string GetMACAddress() { return ipPropsLoaded ? macAddress : "---"; }
-        public string GetWifiSsid()
+        public string GetNetworkName()
         {
-            foreach (UnicastIPAddressInformation unicastAddress in ipProps.UnicastAddresses)
-            {
-                if (unicastAddress.Address.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    string[] parts = unicastAddress.Address.ToString().Split('.');
-                    string subnet = $"parts";
-
-                    IPHostEntry hostEntry = Dns.GetHostEntry(unicastAddress.Address);
-                    return hostEntry.HostName;
-                }
-            }
-            var wifi = new Wifi();
-            var accessPoint = wifi.GetAccessPoints().FirstOrDefault(ap => ap.IsConnected);
-            if (accessPoint != null)
-            {
-                var networkName = accessPoint.Name;
-                return networkName;
-                // Aquí tienes el nombre de la red Wi-Fi en formato de cadena
-            }
-            return "---";
+            string[] networks = NetworkListManager.GetNetworks(NetworkConnectivityLevels.Connected).Where(net => net.IsConnected).Select(net => net.Name).ToArray();
+            return networks.Length > 0 ? networks[0] : "---";
         }
+        public bool IsConnectedViaEthernet() { return ethernetConnection; }
     }
 }
