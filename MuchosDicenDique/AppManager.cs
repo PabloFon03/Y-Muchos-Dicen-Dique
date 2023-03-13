@@ -35,11 +35,11 @@ namespace MuchosDicenDique
         }
         void LoadNetworkData()
         {
-            NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && (net.Name == "Wi-Fi" || net.Name == "Ethernet")).ToArray();
+            NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && net.GetIPProperties().GatewayAddresses.Count > 0).ToArray();
             if (returnNet.Length > 0)
             {
                 NetworkInterface net = returnNet[0];
-                ethernetConnection = net.Name == "Ethernet";
+                ethernetConnection = net.NetworkInterfaceType != NetworkInterfaceType.Wireless80211;
                 macAddress = net.GetPhysicalAddress().ToString();
                 ipProps = net.GetIPProperties();
                 ipPropsLoaded = true;
