@@ -236,7 +236,7 @@ namespace MuchosDicenDique
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 25);
             this.label5.TabIndex = 6;
-            this.label5.Text = "VIrtualBox:";
+            this.label5.Text = "VirtualBox:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
