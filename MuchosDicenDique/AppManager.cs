@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using HtmlAgilityPack;
 using Microsoft.WindowsAPICodePack.Net;
 
 namespace MuchosDicenDique
@@ -23,7 +24,7 @@ namespace MuchosDicenDique
         {
             LoadVirtualBoxVersion();
             LoadNetworkData();
-            CreateVM("test", "Ubuntu_64", "C:\\Users\\Pablo\\Downloads\\ubuntu-mate-22.04.2-desktop-amd64.iso");
+            CreateVM("test", "Ubuntu_64", "C:\\Users\\pablo\\Downloads\\ubuntu-mate-22.04.2-desktop-amd64.iso");
         }
         #region [Entrega 1]
         void LoadVirtualBoxVersion()
@@ -39,11 +40,10 @@ namespace MuchosDicenDique
         }
         void LoadNetworkData()
         {
-            NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && (net.Name == "Wi-Fi" || net.Name == "Ethernet")).ToArray();
+            NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && net.GetIPProperties().GatewayAddresses.Count > 0).ToArray();
             if (returnNet.Length > 0)
             {
                 NetworkInterface net = returnNet[0];
-                Console.WriteLine(net.Name);
                 ethernetConnection = net.NetworkInterfaceType != NetworkInterfaceType.Wireless80211;
                 macAddress = net.GetPhysicalAddress().ToString();
                 ipProps = net.GetIPProperties();
@@ -84,6 +84,7 @@ namespace MuchosDicenDique
         public string GetCurrentVirtualBoxVersion() { return virtualBoxVersion; }
         public string GetLastVirtualBoxVersion()
         {
+            return "7.0.6";
             string s = "";
             using (WebClient wc = new WebClient()) { s = wc.DownloadString("https://download.virtualbox.org/virtualbox/"); }
             MatchCollection m = Regex.Matches(s, @"<a.+?>(\d+(?:\.\d+){0,2})/");
@@ -125,26 +126,61 @@ namespace MuchosDicenDique
         void ShowVMInfo(string _name) { Console.WriteLine(RunVBoxCommand($"showvminfo \"{_name}\"")); }
         void CreateVM(string _name, string _osType, string _ideRoute)
         {
-            // Remove Previous VM
-            //RunVBoxCommand($"unregistervm \"{_name}\" --delete");
             string baseRoute = $@"C:\Users\{Environment.UserName}\Desktop\VirtualBox\";
-            // Create New VM
-            RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{_osType}\" --register --basefolder {baseRoute}");
-            RunVBoxCommand($"modifyvm \"{_name}\" --boot1 dvd --boot2 disk --boot3 none --boot4 none");
-            Task storageTask = Task.Factory.StartNew(() =>
+            Console.WriteLine(baseRoute);
+            Task isoTask = Task.Factory.StartNew(() =>
             {
-                string diskRoute = $"{baseRoute}\\{_name}\\{_name}_DISK.vmdk";
-                RunVBoxCommand($"createmedium disk --filename {diskRoute} --size 80000 --format VMDK");
-                RunVBoxCommand($"storagectl \"{_name}\" --name \"SATA Controller\" --add sata --controller IntelAhci");
-                RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {diskRoute}");
-                RunVBoxCommand($"storagectl \"{_name}\" --name \"IDE Controller\" --add ide --controller PIIX4");
-                RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"IDE Controller\" --port 1 --device 0 --type dvddrive --medium {_ideRoute}");
+                string url = "";
+                string filename = "";
+                switch (_osType)
+                {
+                    // Debian
+                    case "idk":
+                        {
+                            url = "https://ftp.caliu.cat/debian-cd/current/amd64/iso-cd/";
+                            HtmlWeb web = new HtmlWeb();
+                            HtmlDocument doc = web.Load(url);
+                            HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            for (int i = 0; i < nodes.Length && string.IsNullOrEmpty(filename); i++) { if (nodes[i].InnerText == "SHA512SUMS.sign") { filename = nodes[i + 1].InnerText; } }
+                        }
+                        break;
+                    // Ubuntu
+                    default:
+                        {
+                            url = "https://ftp.caliu.cat/ubuntu-cd/";
+                            HtmlWeb web = new HtmlWeb();
+                            HtmlDocument doc = web.Load(url);
+                            HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            string baseUrl = url;
+                            for (int i = 0; i < nodes.Length; i++)
+                            {
+                                Match m = Regex.Match(nodes[i].InnerText, @"(\d+(?:\.\d+){0,2})");
+                                if (m.Success) { url = baseUrl + m.Value + "/"; }
+                            }
+                            Console.WriteLine(url);
+                            doc = web.Load(url);
+                            nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            for (int i = 0; i < nodes.Length && string.IsNullOrEmpty(filename); i++) { if (nodes[i].InnerText == "SHA256SUMS.gpg") { filename = nodes[i + 1].InnerText; } }
+                        }
+                        break;
+                }
+                Console.WriteLine(filename);
+                string isoPath = $"{baseRoute}\\{_osType}\\{filename}";
+                //if (!File.Exists(isoPath)) { using (WebClient wc = new WebClient()) { wc.DownloadFile(url, isoPath); } }
             });
+            RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{_osType}\" --register --basefolder {baseRoute}");
             RunVBoxCommand($"modifyvm \"{_name}\" --ioapic on");
             RunVBoxCommand($"modifyvm \"{_name}\" --graphicscontroller VMSVGA");
-            RunVBoxCommand($"modifyvm \"{_name}\" --memory 512 --vram 32");
+            RunVBoxCommand($"modifyvm \"{_name}\" --memory 2048 --vram 32");
             RunVBoxCommand($"modifyvm \"{_name}\" --nic1 nat");
-            storageTask.Wait();
+            string diskRoute = $"{baseRoute}\\{_name}\\{_name}_DISK.vmdk";
+            RunVBoxCommand($"createmedium disk --filename {diskRoute} --size 80000 --format VMDK");
+            RunVBoxCommand($"storagectl \"{_name}\" --name \"SATA Controller\" --add sata --controller IntelAhci");
+            RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {diskRoute}");
+            RunVBoxCommand($"storagectl \"{_name}\" --name \"IDE Controller\" --add ide --controller PIIX4");
+            isoTask.Wait();
+            RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"IDE Controller\" --port 1 --device 0 --type dvddrive --medium {_ideRoute}");
+            RunVBoxCommand($"modifyvm \"{_name}\" --boot1 dvd --boot2 disk --boot3 none --boot4 none");
             RunVBoxCommand($"startvm \"{_name}\"");
         }
         #endregion
