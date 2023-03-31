@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Microsoft.WindowsAPICodePack.Net;
 
 namespace MuchosDicenDique
@@ -21,7 +22,13 @@ namespace MuchosDicenDique
         {
             LoadVirtualBoxVersion();
             LoadNetworkData();
+            foreach (string s in ListAllVMs())
+            {
+                Console.WriteLine(s);
+                ShowVMInfo(s);
+            }
         }
+        #region [Entrega 1]
         void LoadVirtualBoxVersion()
         {
             virtualBoxVersion = "N/A";
@@ -35,11 +42,12 @@ namespace MuchosDicenDique
         }
         void LoadNetworkData()
         {
-            NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && net.GetIPProperties().GatewayAddresses.Count > 0).ToArray();
+            NetworkInterface[] returnNet = NetworkInterface.GetAllNetworkInterfaces().Where(net => net.OperationalStatus == OperationalStatus.Up && (net.Name == "Wi-Fi" || net.Name == "Ethernet")).ToArray();
             if (returnNet.Length > 0)
             {
                 NetworkInterface net = returnNet[0];
-                ethernetConnection = net.NetworkInterfaceType != NetworkInterfaceType.Wireless80211;
+                Console.WriteLine(net.Name);
+                ethernetConnection = net.Name == "Ethernet";
                 macAddress = net.GetPhysicalAddress().ToString();
                 ipProps = net.GetIPProperties();
                 ipPropsLoaded = true;
@@ -94,5 +102,30 @@ namespace MuchosDicenDique
             return networks.Length > 0 ? networks[0] : "---";
         }
         public bool IsConnectedViaEthernet() { return ethernetConnection; }
+        #endregion
+        #region [Entrega 2]
+        string RunVBoxCommand(string _cmd)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo(@"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe", _cmd);
+            psi.RedirectStandardOutput = true;
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            Process process = new Process();
+            process.StartInfo = psi;
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            return output;
+        }
+        string[] ListAllVMs()
+        {
+            string result = RunVBoxCommand("list vms");
+            MatchCollection m = Regex.Matches(result, '"' + "(.+)" + '"');
+            string[] returnArr = new string[m.Count];
+            for (int i = 0; i < returnArr.Length; i++) { returnArr[i] = m[i].Groups[1].Value; }
+            return returnArr;
+        }
+        void ShowVMInfo(string _name) { Console.WriteLine(RunVBoxCommand($"showvminfo \"{_name}\"")); }
+        #endregion
     }
 }
