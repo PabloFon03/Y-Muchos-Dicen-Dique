@@ -12,8 +12,12 @@ namespace MuchosDicenDique
             manager = new AppManager();
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e)
+        {
+            Entrega1();
+        }
+        #region [Entrega 1]
+        void Entrega1()
         {
             Label_IPHost.Text = manager.GetNetworkAddress();
             Label_IPGateway.Text = manager.GetNetworkGateway();
@@ -66,5 +70,6 @@ namespace MuchosDicenDique
             Label_VBVersion.Text = $"{currentVersion} ({lastVersion})";
             Label_VBVersion.ForeColor = currentVersion == lastVersion ? Color.Green : currentVersion == "N/A" ? Color.Red : Color.Goldenrod;
         }
+        #endregion
     }
 }

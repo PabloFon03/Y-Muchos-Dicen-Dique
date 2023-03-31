@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.WindowsAPICodePack.Net;
 
@@ -22,11 +23,7 @@ namespace MuchosDicenDique
         {
             LoadVirtualBoxVersion();
             LoadNetworkData();
-            foreach (string s in ListAllVMs())
-            {
-                Console.WriteLine(s);
-                ShowVMInfo(s);
-            }
+            CreateVM("test", "Ubuntu_64", "C:\\Users\\Pablo\\Downloads\\ubuntu-mate-22.04.2-desktop-amd64.iso");
         }
         #region [Entrega 1]
         void LoadVirtualBoxVersion()
@@ -47,7 +44,7 @@ namespace MuchosDicenDique
             {
                 NetworkInterface net = returnNet[0];
                 Console.WriteLine(net.Name);
-                ethernetConnection = net.Name == "Ethernet";
+                ethernetConnection = net.NetworkInterfaceType != NetworkInterfaceType.Wireless80211;
                 macAddress = net.GetPhysicalAddress().ToString();
                 ipProps = net.GetIPProperties();
                 ipPropsLoaded = true;
@@ -126,6 +123,30 @@ namespace MuchosDicenDique
             return returnArr;
         }
         void ShowVMInfo(string _name) { Console.WriteLine(RunVBoxCommand($"showvminfo \"{_name}\"")); }
+        void CreateVM(string _name, string _osType, string _ideRoute)
+        {
+            // Remove Previous VM
+            //RunVBoxCommand($"unregistervm \"{_name}\" --delete");
+            string baseRoute = $@"C:\Users\{Environment.UserName}\Desktop\VirtualBox\";
+            // Create New VM
+            RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{_osType}\" --register --basefolder {baseRoute}");
+            RunVBoxCommand($"modifyvm \"{_name}\" --boot1 dvd --boot2 disk --boot3 none --boot4 none");
+            Task storageTask = Task.Factory.StartNew(() =>
+            {
+                string diskRoute = $"{baseRoute}\\{_name}\\{_name}_DISK.vmdk";
+                RunVBoxCommand($"createmedium disk --filename {diskRoute} --size 80000 --format VMDK");
+                RunVBoxCommand($"storagectl \"{_name}\" --name \"SATA Controller\" --add sata --controller IntelAhci");
+                RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {diskRoute}");
+                RunVBoxCommand($"storagectl \"{_name}\" --name \"IDE Controller\" --add ide --controller PIIX4");
+                RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"IDE Controller\" --port 1 --device 0 --type dvddrive --medium {_ideRoute}");
+            });
+            RunVBoxCommand($"modifyvm \"{_name}\" --ioapic on");
+            RunVBoxCommand($"modifyvm \"{_name}\" --graphicscontroller VMSVGA");
+            RunVBoxCommand($"modifyvm \"{_name}\" --memory 512 --vram 32");
+            RunVBoxCommand($"modifyvm \"{_name}\" --nic1 nat");
+            storageTask.Wait();
+            RunVBoxCommand($"startvm \"{_name}\"");
+        }
         #endregion
     }
 }
