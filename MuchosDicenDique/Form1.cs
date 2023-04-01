@@ -147,6 +147,61 @@ namespace MuchosDicenDique
                         "Other Linux (64-bit)"
                     });
                     break;
+                // Solaris
+                case 2:
+                    ComboBox_NewVMOSVersion.Items.AddRange(new object[]
+                    {
+                        "Oracle Solaris 10 5/09 and earlier (32-bit)",
+                        "Oracle Solaris 10 5/09 and earlier (64-bit)",
+                        "Oracle Solaris 10 10/09 and earlier (32-bit)",
+                        "Oracle Solaris 10 10/09 and earlier (64-bit)",
+                        "Oracle Solaris 11 (64-bit)",
+                        "OpenSolaris / Illumos / OpenIndiana (32-bit)",
+                        "OpenSolaris / Illumos / OpenIndiana (64-bit)"
+                    });
+                    break;
+                // BSD
+                case 3:
+                    ComboBox_NewVMOSVersion.Items.AddRange(new object[]
+                    {
+                        "FreeBSD (32-bit)",
+                        "FreeBSD (64-bit)",
+                        "OpenBSD (32-bit)",
+                        "OpenBSD (64-bit)",
+                        "NetBSD (32-bit)",
+                        "NetBSD (64-bit)"
+                    });
+                    break;
+                // IBM OS/2
+                case 4:
+                    ComboBox_NewVMOSVersion.Items.AddRange(new object[]
+                    {
+                        "OS/2 1.x",
+                        "OS/2 Warp 3",
+                        "OS/2 Warp 4",
+                        "OS/2 Warp 4.5",
+                        "eComStation",
+                        "ArcaOS",
+                        "Other OS/2"
+                    });
+                    break;
+                // Mac OS X
+                case 5:
+                    ComboBox_NewVMOSVersion.Items.AddRange(new object[]
+                    {
+                        "Mac OS X (32-bit)",
+                        "Mac OS X (64-bit)",
+                        "Mac OS X 10.6 Snow Leopard (32-bit)",
+                        "Mac OS X 10.6 Snow Leopard (64-bit)",
+                        "Mac OS X 10.7 Lion (64-bit)",
+                        "Mac OS X 10.8 Mountain Lion (64-bit)",
+                        "Mac OS X 10.9 Mavericks (64-bit)",
+                        "Mac OS X 10.10 Yosemite (64-bit)",
+                        "Mac OS X 10.11 El Capitan (64-bit)",
+                        "macOS 10.12 Sierra (64-bit)",
+                        "macOS 10.13 High Sierra (64-bit)"
+                    });
+                    break;
                 // Other
                 default:
                     ComboBox_NewVMOSVersion.Items.AddRange(new object[]

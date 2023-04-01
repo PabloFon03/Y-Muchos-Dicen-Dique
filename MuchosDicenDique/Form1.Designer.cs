@@ -517,7 +517,7 @@ namespace MuchosDicenDique
             "Solaris",
             "BSD",
             "IBM OS/2",
-            "IBM OS/X",
+            "Mac OS X",
             "Other"});
             this.ComboBox_NewVMOSType.Location = new System.Drawing.Point(229, 38);
             this.ComboBox_NewVMOSType.Name = "ComboBox_NewVMOSType";
