@@ -84,7 +84,6 @@ namespace MuchosDicenDique
         public string GetCurrentVirtualBoxVersion() { return virtualBoxVersion; }
         public string GetLastVirtualBoxVersion()
         {
-            return "7.0.6";
             string s = "";
             using (WebClient wc = new WebClient()) { s = wc.DownloadString("https://download.virtualbox.org/virtualbox/"); }
             MatchCollection m = Regex.Matches(s, @"<a.+?>(\d+(?:\.\d+){0,2})/");
