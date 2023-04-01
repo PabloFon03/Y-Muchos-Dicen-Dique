@@ -8,6 +8,9 @@ namespace MuchosDicenDique
     {
         AppManager manager;
         string vmPath = "";
+        string vmDiskPath = "";
+        string vmIdePath = "";
+        string gfxController = "";
         public Form1()
         {
             manager = new AppManager();
@@ -219,14 +222,72 @@ namespace MuchosDicenDique
                     break;
             }
         }
+        string TruncatePath(string _path) { return _path.Length > 24 ? _path.Substring(0, 21) + "..." : _path; }
         private void Button_SelectVMLocation_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             if (folderDialog.ShowDialog() == DialogResult.OK)
             {
                 vmPath = folderDialog.SelectedPath;
-                Button_SelectVMLocation.Text = vmPath.Length > 24 ? vmPath.Substring(0, 21) + "..." : vmPath;
+                Button_SelectVMLocation.Text = TruncatePath(vmPath);
             }
+        }
+        private void Button_SelectVMDisk_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine(fileDialog.FileName);
+                vmDiskPath = fileDialog.FileName;
+                Button_SelectVMDisk.Text = TruncatePath(vmDiskPath);
+            }
+        }
+        private void Button_SelectExistingIDE_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "ISO Disk Files|*.iso";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine(fileDialog.FileName);
+                vmIdePath = fileDialog.FileName;
+                Button_SelectExistingIDE.Text = TruncatePath(vmIdePath);
+            }
+        }
+        private void ComboBox_NewVMGraphicsController_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gfxController = ComboBox_NewVMGraphicsController.SelectedText == "None" ? "null" : ComboBox_NewVMGraphicsController.SelectedText.ToLower();
+        }
+        private void Button_CreateVM_Click(object sender, EventArgs e)
+        {
+            manager.CreateVM
+            (
+                // Base Route
+                vmPath,
+                // Name
+                TextBox_NewVMName.Text,
+                // OS Type
+                ComboBox_NewVMOSType.SelectedText,
+                // Virtual Disk Memory
+                RadioButton_CreateNewDisk.Checked ? (int)NumericUpDown_CreateVirtualDiskSize.Value : -1,
+                // Virtual Disk Type
+                ComboBox_CreateNewDiskFormat.SelectedText,
+                // Virtual Disk Route
+                RadioButton_UseExistingDisk.Checked ? vmDiskPath : "",
+                // IDE Route
+                RadioButton_UseExistingIDE.Checked ? vmIdePath : "",
+                // IDE Download OS
+                RadioButton_DownloadLatestIDE.Checked ? ComboBox_DownloadIDEType.SelectedText : "",
+                // RAM Memory
+                (int)NumericUpDown_RAMMemory.Value,
+                // CPU Cores
+                (int)NumericUpDown_CPUCores.Value,
+                // GFX Controller
+                gfxController,
+                // Video Memory
+                (int)NumericUpDown_VideoMemory.Value,
+                // Start Up VM
+                CheckBox_StartVM.Checked
+            );
         }
         #endregion
     }

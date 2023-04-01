@@ -126,18 +126,17 @@ namespace MuchosDicenDique
             return returnArr;
         }
         void ShowVMInfo(string _name) { Console.WriteLine(RunVBoxCommand($"showvminfo \"{_name}\" --machinereadable")); }
-        void CreateVM(string _name, string _osType, string _ideRoute)
+        public void CreateVM(string _baseRoute, string _name, string _osType, int _diskMemory, string _diskType, string _diskRoute, string _ideRoute, string _ideOsType, int _memory, int _cores, string _gfxController, int _gfxMemory, bool _startVM)
         {
-            string baseRoute = $@"C:\Users\{Environment.UserName}\Desktop\VirtualBox\";
-            Console.WriteLine(baseRoute);
+            // Get IDE ISO From Mirror
             Task isoTask = Task.Factory.StartNew(() =>
             {
                 string url = "";
                 string filename = "";
-                switch (_osType)
+                switch (_ideOsType)
                 {
                     // Debian
-                    case "idk":
+                    case "Debian (64-bit)":
                         {
                             url = "https://ftp.caliu.cat/debian-cd/current/amd64/iso-cd/";
                             HtmlWeb web = new HtmlWeb();
@@ -147,7 +146,7 @@ namespace MuchosDicenDique
                         }
                         break;
                     // Ubuntu
-                    default:
+                    case "Ubuntu (64-bit)":
                         {
                             url = "https://ftp.caliu.cat/ubuntu-cd/";
                             HtmlWeb web = new HtmlWeb();
@@ -166,32 +165,41 @@ namespace MuchosDicenDique
                         }
                         break;
                 }
-                Console.WriteLine(filename);
-                string isoPath = $"{baseRoute}\\{_osType}\\{filename}";
-                //if (!File.Exists(isoPath)) { using (WebClient wc = new WebClient()) { wc.DownloadFile(url, isoPath); } }
+                if (url != "")
+                {
+                    _ideRoute = $"{_baseRoute}\\{_osType}\\{filename}";
+                    //if (!File.Exists(_ideRoute)) { using (WebClient wc = new WebClient()) { wc.DownloadFile(url, _ideRoute); } }
+                }
             });
             // Create New VM
-            RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{_osType}\" --register --basefolder {baseRoute}");
+            RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{_osType}\" --register --basefolder {_baseRoute}");
             // Enable I/O APIC
             RunVBoxCommand($"modifyvm \"{_name}\" --ioapic on");
             // GFX Settings
-            RunVBoxCommand($"modifyvm \"{_name}\" --graphicscontroller VMSVGA");
-            RunVBoxCommand($"modifyvm \"{_name}\" --cpus 2 --memory 2048 --vram 32");
+            RunVBoxCommand($"modifyvm \"{_name}\" --graphicscontroller {_gfxController}");
+            RunVBoxCommand($"modifyvm \"{_name}\" --cpus {_cores} --memory {_memory} --vram {_gfxMemory}");
             // Net Settings
             RunVBoxCommand($"modifyvm \"{_name}\" --nic1 nat");
             // Hard Disk Settings
-            string diskRoute = $"{baseRoute}\\{_name}\\{_name}_DISK.vmdk";
-            RunVBoxCommand($"createmedium disk --filename {diskRoute} --size 80000 --format VMDK");
-            RunVBoxCommand($"storagectl \"{_name}\" --name \"SATA Controller\" --add sata --controller IntelAhci");
-            RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {diskRoute}");
+            if (string.IsNullOrEmpty(_diskRoute))
+            {
+                if (_diskMemory > 0)
+                {
+                    string diskRoute = $"{_baseRoute}\\{_name}\\{_name}_DISK.{_diskType.ToLower()}";
+                    RunVBoxCommand($"createmedium disk --filename {diskRoute} --size {_diskMemory} --format {_diskType}");
+                    RunVBoxCommand($"storagectl \"{_name}\" --name \"SATA Controller\" --add sata --controller IntelAhci");
+                    RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {diskRoute}");
+                }
+            }
+            else { RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {_diskRoute}"); }
             // IDE Settings
             RunVBoxCommand($"storagectl \"{_name}\" --name \"IDE Controller\" --add ide --controller PIIX4");
             isoTask.Wait();
-            RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"IDE Controller\" --port 1 --device 0 --type dvddrive --medium {_ideRoute}");
+            if (!string.IsNullOrEmpty(_ideRoute)) { RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"IDE Controller\" --port 1 --device 0 --type dvddrive --medium {_ideRoute}"); }
             // Boot Settings
             RunVBoxCommand($"modifyvm \"{_name}\" --boot1 dvd --boot2 disk --boot3 none --boot4 none");
             // Start VM
-            RunVBoxCommand($"startvm \"{_name}\"");
+            if (_startVM) { RunVBoxCommand($"startvm \"{_name}\""); }
         }
         #endregion
     }
