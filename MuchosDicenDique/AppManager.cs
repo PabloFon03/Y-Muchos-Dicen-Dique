@@ -176,7 +176,7 @@ namespace MuchosDicenDique
             RunVBoxCommand($"modifyvm \"{_name}\" --ioapic on");
             // GFX Settings
             RunVBoxCommand($"modifyvm \"{_name}\" --graphicscontroller VMSVGA");
-            RunVBoxCommand($"modifyvm \"{_name}\" --memory 2048 --vram 32");
+            RunVBoxCommand($"modifyvm \"{_name}\" --cpus 2 --memory 2048 --vram 32");
             // Net Settings
             RunVBoxCommand($"modifyvm \"{_name}\" --nic1 nat");
             // Hard Disk Settings

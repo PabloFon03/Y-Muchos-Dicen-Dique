@@ -7,6 +7,7 @@ namespace MuchosDicenDique
     public partial class Form1 : Form
     {
         AppManager manager;
+        string vmPath = "";
         public Form1()
         {
             manager = new AppManager();
@@ -216,6 +217,15 @@ namespace MuchosDicenDique
                         "Other/Unknow (64-bit)"
                     });
                     break;
+            }
+        }
+        private void Button_SelectVMLocation_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            if (folderDialog.ShowDialog() == DialogResult.OK)
+            {
+                vmPath = folderDialog.SelectedPath;
+                Button_SelectVMLocation.Text = vmPath.Length > 24 ? vmPath.Substring(0, 21) + "..." : vmPath;
             }
         }
         #endregion

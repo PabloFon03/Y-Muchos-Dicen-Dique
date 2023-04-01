@@ -53,25 +53,32 @@ namespace MuchosDicenDique
             this.Label_IPGateway = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.ComboBox_NewVMOSVersion = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.TextBox_NewVMName = new System.Windows.Forms.TextBox();
             this.ComboBox_NewVMOSType = new System.Windows.Forms.ComboBox();
-            this.ComboBox_NewVMOSVersion = new System.Windows.Forms.ComboBox();
+            this.Button_SelectVMLocation = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -354,49 +361,29 @@ namespace MuchosDicenDique
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(20, 220);
+            this.tabControl1.Location = new System.Drawing.Point(20, 206);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1200, 450);
+            this.tabControl1.Size = new System.Drawing.Size(1200, 405);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.panel4);
+            this.tabPage1.Controls.Add(this.panel3);
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 30);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1192, 416);
+            this.tabPage1.Size = new System.Drawing.Size(1192, 371);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create VM";
-            // 
-            // panel1
-            // 
-            this.panel1.AccessibleName = "Main Settings";
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.tableLayoutPanel2);
-            this.panel1.Controls.Add(this.label12);
-            this.panel1.Location = new System.Drawing.Point(7, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(462, 175);
-            this.panel1.TabIndex = 0;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tabPage2.Location = new System.Drawing.Point(4, 30);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1192, 416);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "List VMs";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -407,18 +394,6 @@ namespace MuchosDicenDique
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(462, 175);
             this.panel2.TabIndex = 1;
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.label12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label12.Location = new System.Drawing.Point(1, 0);
-            this.label12.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(461, 23);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Main Settings";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
             // 
@@ -432,6 +407,17 @@ namespace MuchosDicenDique
             this.label13.Text = "IDE Settings";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panel1
+            // 
+            this.panel1.AccessibleName = "Main Settings";
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.tableLayoutPanel2);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Location = new System.Drawing.Point(7, 7);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(462, 175);
+            this.panel1.TabIndex = 0;
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -444,6 +430,7 @@ namespace MuchosDicenDique
             this.tableLayoutPanel2.Controls.Add(this.label17, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.TextBox_NewVMName, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.ComboBox_NewVMOSType, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.Button_SelectVMLocation, 1, 3);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 27);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
@@ -453,6 +440,17 @@ namespace MuchosDicenDique
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(453, 143);
             this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // ComboBox_NewVMOSVersion
+            // 
+            this.ComboBox_NewVMOSVersion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.ComboBox_NewVMOSVersion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ComboBox_NewVMOSVersion.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox_NewVMOSVersion.FormattingEnabled = true;
+            this.ComboBox_NewVMOSVersion.Location = new System.Drawing.Point(229, 73);
+            this.ComboBox_NewVMOSVersion.Name = "ComboBox_NewVMOSVersion";
+            this.ComboBox_NewVMOSVersion.Size = new System.Drawing.Size(221, 25);
+            this.ComboBox_NewVMOSVersion.TabIndex = 9;
             // 
             // label14
             // 
@@ -525,21 +523,87 @@ namespace MuchosDicenDique
             this.ComboBox_NewVMOSType.TabIndex = 8;
             this.ComboBox_NewVMOSType.SelectedIndexChanged += new System.EventHandler(this.ComboBox_NewVMOSType_SelectedIndexChanged);
             // 
-            // ComboBox_NewVMOSVersion
+            // Button_SelectVMLocation
             // 
-            this.ComboBox_NewVMOSVersion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.ComboBox_NewVMOSVersion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboBox_NewVMOSVersion.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboBox_NewVMOSVersion.FormattingEnabled = true;
-            this.ComboBox_NewVMOSVersion.Location = new System.Drawing.Point(229, 73);
-            this.ComboBox_NewVMOSVersion.Name = "ComboBox_NewVMOSVersion";
-            this.ComboBox_NewVMOSVersion.Size = new System.Drawing.Size(221, 25);
-            this.ComboBox_NewVMOSVersion.TabIndex = 9;
+            this.Button_SelectVMLocation.Font = new System.Drawing.Font("VCR OSD Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.Button_SelectVMLocation.Location = new System.Drawing.Point(229, 108);
+            this.Button_SelectVMLocation.Name = "Button_SelectVMLocation";
+            this.Button_SelectVMLocation.Size = new System.Drawing.Size(221, 32);
+            this.Button_SelectVMLocation.TabIndex = 10;
+            this.Button_SelectVMLocation.UseVisualStyleBackColor = true;
+            this.Button_SelectVMLocation.Click += new System.EventHandler(this.Button_SelectVMLocation_Click);
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.label12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label12.Location = new System.Drawing.Point(1, 0);
+            this.label12.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(461, 23);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Main Settings";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1192, 416);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "List VMs";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.AccessibleName = "IDE Settings";
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label18);
+            this.panel3.Location = new System.Drawing.Point(8, 188);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(462, 175);
+            this.panel3.TabIndex = 3;
+            // 
+            // label18
+            // 
+            this.label18.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.label18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label18.Location = new System.Drawing.Point(0, 2);
+            this.label18.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(461, 21);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Disk Settings";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel4
+            // 
+            this.panel4.AccessibleName = "IDE Settings";
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Location = new System.Drawing.Point(482, 188);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(462, 175);
+            this.panel4.TabIndex = 4;
+            // 
+            // label19
+            // 
+            this.label19.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.label19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label19.Location = new System.Drawing.Point(0, 2);
+            this.label19.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(461, 21);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Hardware Settings";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.ClientSize = new System.Drawing.Size(1250, 700);
+            this.ClientSize = new System.Drawing.Size(1232, 628);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
@@ -554,10 +618,12 @@ namespace MuchosDicenDique
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -600,5 +666,10 @@ namespace MuchosDicenDique
         private System.Windows.Forms.TextBox TextBox_NewVMName;
         private System.Windows.Forms.ComboBox ComboBox_NewVMOSType;
         private System.Windows.Forms.ComboBox ComboBox_NewVMOSVersion;
+        private System.Windows.Forms.Button Button_SelectVMLocation;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label19;
     }
 }
