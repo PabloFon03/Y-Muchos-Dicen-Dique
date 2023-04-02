@@ -53,6 +53,11 @@ namespace MuchosDicenDique
             this.Label_IPGateway = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.CheckBox_StartVM = new System.Windows.Forms.CheckBox();
+            this.Button_CreateVM = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -79,6 +84,12 @@ namespace MuchosDicenDique
             this.NumericUpDown_CreateVirtualDiskSize = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.RadioButton_DownloadLatestIDE = new System.Windows.Forms.RadioButton();
+            this.Button_SelectExistingIDE = new System.Windows.Forms.Button();
+            this.RadioButton_UseExistingIDE = new System.Windows.Forms.RadioButton();
+            this.RadioButton_InstallNoIDE = new System.Windows.Forms.RadioButton();
+            this.ComboBox_DownloadIDEType = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -92,20 +103,11 @@ namespace MuchosDicenDique
             this.Button_SelectVMLocation = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.RadioButton_DownloadLatestIDE = new System.Windows.Forms.RadioButton();
-            this.Button_SelectExistingIDE = new System.Windows.Forms.Button();
-            this.RadioButton_UseExistingIDE = new System.Windows.Forms.RadioButton();
-            this.RadioButton_InstallNoIDE = new System.Windows.Forms.RadioButton();
-            this.ComboBox_DownloadIDEType = new System.Windows.Forms.ComboBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label27 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.CheckBox_StartVM = new System.Windows.Forms.CheckBox();
-            this.Button_CreateVM = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_VideoMemory)).BeginInit();
@@ -116,11 +118,9 @@ namespace MuchosDicenDique
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_CreateVirtualDiskSize)).BeginInit();
             this.panel2.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -428,6 +428,66 @@ namespace MuchosDicenDique
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create VM";
             // 
+            // panel5
+            // 
+            this.panel5.AccessibleName = "IDE Settings";
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.tableLayoutPanel7);
+            this.panel5.Controls.Add(this.label27);
+            this.panel5.Location = new System.Drawing.Point(952, 273);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(230, 90);
+            this.panel5.TabIndex = 6;
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Controls.Add(this.CheckBox_StartVM, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.Button_CreateVM, 0, 1);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(-1, 26);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(230, 63);
+            this.tableLayoutPanel7.TabIndex = 3;
+            // 
+            // CheckBox_StartVM
+            // 
+            this.CheckBox_StartVM.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckBox_StartVM.Location = new System.Drawing.Point(3, 3);
+            this.CheckBox_StartVM.Name = "CheckBox_StartVM";
+            this.CheckBox_StartVM.Size = new System.Drawing.Size(224, 25);
+            this.CheckBox_StartVM.TabIndex = 0;
+            this.CheckBox_StartVM.Text = "Start Up VM";
+            this.CheckBox_StartVM.UseVisualStyleBackColor = true;
+            // 
+            // Button_CreateVM
+            // 
+            this.Button_CreateVM.Location = new System.Drawing.Point(3, 34);
+            this.Button_CreateVM.Name = "Button_CreateVM";
+            this.Button_CreateVM.Size = new System.Drawing.Size(223, 26);
+            this.Button_CreateVM.TabIndex = 1;
+            this.Button_CreateVM.Text = "Create New VM";
+            this.Button_CreateVM.UseVisualStyleBackColor = true;
+            this.Button_CreateVM.Click += new System.EventHandler(this.Button_CreateVM_Click);
+            // 
+            // label27
+            // 
+            this.label27.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.label27.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label27.Location = new System.Drawing.Point(0, 2);
+            this.label27.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(227, 21);
+            this.label27.TabIndex = 2;
+            this.label27.Text = "Final Settings";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel4
             // 
             this.panel4.AccessibleName = "IDE Settings";
@@ -472,9 +532,8 @@ namespace MuchosDicenDique
             this.comboBox3.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
-            "VDI",
-            "VHD",
-            "VMDK"});
+            "None",
+            "NAT"});
             this.comboBox3.Location = new System.Drawing.Point(230, 119);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(221, 25);
@@ -508,6 +567,11 @@ namespace MuchosDicenDique
             this.NumericUpDown_VideoMemory.Name = "NumericUpDown_VideoMemory";
             this.NumericUpDown_VideoMemory.Size = new System.Drawing.Size(221, 24);
             this.NumericUpDown_VideoMemory.TabIndex = 12;
+            this.NumericUpDown_VideoMemory.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
             // 
             // NumericUpDown_CPUCores
             // 
@@ -520,6 +584,11 @@ namespace MuchosDicenDique
             this.NumericUpDown_CPUCores.Name = "NumericUpDown_CPUCores";
             this.NumericUpDown_CPUCores.Size = new System.Drawing.Size(221, 24);
             this.NumericUpDown_CPUCores.TabIndex = 8;
+            this.NumericUpDown_CPUCores.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // label26
             // 
@@ -556,6 +625,11 @@ namespace MuchosDicenDique
             this.NumericUpDown_RAMMemory.Name = "NumericUpDown_RAMMemory";
             this.NumericUpDown_RAMMemory.Size = new System.Drawing.Size(221, 24);
             this.NumericUpDown_RAMMemory.TabIndex = 7;
+            this.NumericUpDown_RAMMemory.Value = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
             // 
             // label23
             // 
@@ -754,6 +828,11 @@ namespace MuchosDicenDique
             this.NumericUpDown_CreateVirtualDiskSize.Name = "NumericUpDown_CreateVirtualDiskSize";
             this.NumericUpDown_CreateVirtualDiskSize.Size = new System.Drawing.Size(104, 24);
             this.NumericUpDown_CreateVirtualDiskSize.TabIndex = 5;
+            this.NumericUpDown_CreateVirtualDiskSize.Value = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            0});
             // 
             // label18
             // 
@@ -777,6 +856,94 @@ namespace MuchosDicenDique
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(462, 175);
             this.panel2.TabIndex = 1;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.RadioButton_DownloadLatestIDE, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.Button_SelectExistingIDE, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.RadioButton_UseExistingIDE, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.RadioButton_InstallNoIDE, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.ComboBox_DownloadIDEType, 1, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 24);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(454, 146);
+            this.tableLayoutPanel6.TabIndex = 5;
+            // 
+            // RadioButton_DownloadLatestIDE
+            // 
+            this.RadioButton_DownloadLatestIDE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RadioButton_DownloadLatestIDE.AutoSize = true;
+            this.RadioButton_DownloadLatestIDE.Location = new System.Drawing.Point(3, 3);
+            this.RadioButton_DownloadLatestIDE.Name = "RadioButton_DownloadLatestIDE";
+            this.RadioButton_DownloadLatestIDE.Size = new System.Drawing.Size(221, 42);
+            this.RadioButton_DownloadLatestIDE.TabIndex = 12;
+            this.RadioButton_DownloadLatestIDE.Text = "Download Latest";
+            this.RadioButton_DownloadLatestIDE.UseVisualStyleBackColor = true;
+            // 
+            // Button_SelectExistingIDE
+            // 
+            this.Button_SelectExistingIDE.Font = new System.Drawing.Font("VCR OSD Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.Button_SelectExistingIDE.Location = new System.Drawing.Point(230, 51);
+            this.Button_SelectExistingIDE.Name = "Button_SelectExistingIDE";
+            this.Button_SelectExistingIDE.Size = new System.Drawing.Size(221, 42);
+            this.Button_SelectExistingIDE.TabIndex = 11;
+            this.Button_SelectExistingIDE.UseVisualStyleBackColor = true;
+            this.Button_SelectExistingIDE.Click += new System.EventHandler(this.Button_SelectExistingIDE_Click);
+            // 
+            // RadioButton_UseExistingIDE
+            // 
+            this.RadioButton_UseExistingIDE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RadioButton_UseExistingIDE.AutoSize = true;
+            this.RadioButton_UseExistingIDE.Location = new System.Drawing.Point(3, 51);
+            this.RadioButton_UseExistingIDE.Name = "RadioButton_UseExistingIDE";
+            this.RadioButton_UseExistingIDE.Size = new System.Drawing.Size(221, 42);
+            this.RadioButton_UseExistingIDE.TabIndex = 3;
+            this.RadioButton_UseExistingIDE.Text = "Use Existing";
+            this.RadioButton_UseExistingIDE.UseVisualStyleBackColor = true;
+            // 
+            // RadioButton_InstallNoIDE
+            // 
+            this.RadioButton_InstallNoIDE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RadioButton_InstallNoIDE.AutoSize = true;
+            this.RadioButton_InstallNoIDE.Checked = true;
+            this.RadioButton_InstallNoIDE.Location = new System.Drawing.Point(3, 99);
+            this.RadioButton_InstallNoIDE.Name = "RadioButton_InstallNoIDE";
+            this.RadioButton_InstallNoIDE.Size = new System.Drawing.Size(221, 44);
+            this.RadioButton_InstallNoIDE.TabIndex = 4;
+            this.RadioButton_InstallNoIDE.TabStop = true;
+            this.RadioButton_InstallNoIDE.Text = "Do Nothing";
+            this.RadioButton_InstallNoIDE.UseVisualStyleBackColor = true;
+            // 
+            // ComboBox_DownloadIDEType
+            // 
+            this.ComboBox_DownloadIDEType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ComboBox_DownloadIDEType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.ComboBox_DownloadIDEType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ComboBox_DownloadIDEType.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox_DownloadIDEType.FormattingEnabled = true;
+            this.ComboBox_DownloadIDEType.ItemHeight = 17;
+            this.ComboBox_DownloadIDEType.Items.AddRange(new object[] {
+            "Debian (64-bit)",
+            "Ubuntu (64-bit)"});
+            this.ComboBox_DownloadIDEType.Location = new System.Drawing.Point(230, 3);
+            this.ComboBox_DownloadIDEType.Name = "ComboBox_DownloadIDEType";
+            this.ComboBox_DownloadIDEType.Size = new System.Drawing.Size(221, 25);
+            this.ComboBox_DownloadIDEType.TabIndex = 13;
             // 
             // label13
             // 
@@ -835,6 +1002,7 @@ namespace MuchosDicenDique
             this.ComboBox_NewVMOSVersion.Name = "ComboBox_NewVMOSVersion";
             this.ComboBox_NewVMOSVersion.Size = new System.Drawing.Size(221, 25);
             this.ComboBox_NewVMOSVersion.TabIndex = 9;
+            this.ComboBox_NewVMOSVersion.SelectedIndexChanged += new System.EventHandler(this.ComboBox_NewVMOSVersion_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -940,154 +1108,6 @@ namespace MuchosDicenDique
             this.tabPage2.Text = "List VMs";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Controls.Add(this.RadioButton_DownloadLatestIDE, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.Button_SelectExistingIDE, 1, 1);
-            this.tableLayoutPanel6.Controls.Add(this.RadioButton_UseExistingIDE, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.RadioButton_InstallNoIDE, 0, 2);
-            this.tableLayoutPanel6.Controls.Add(this.ComboBox_DownloadIDEType, 1, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 24);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 3;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(454, 146);
-            this.tableLayoutPanel6.TabIndex = 5;
-            // 
-            // RadioButton_DownloadLatestIDE
-            // 
-            this.RadioButton_DownloadLatestIDE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RadioButton_DownloadLatestIDE.AutoSize = true;
-            this.RadioButton_DownloadLatestIDE.Location = new System.Drawing.Point(3, 3);
-            this.RadioButton_DownloadLatestIDE.Name = "RadioButton_DownloadLatestIDE";
-            this.RadioButton_DownloadLatestIDE.Size = new System.Drawing.Size(221, 42);
-            this.RadioButton_DownloadLatestIDE.TabIndex = 12;
-            this.RadioButton_DownloadLatestIDE.Text = "Download Latest";
-            this.RadioButton_DownloadLatestIDE.UseVisualStyleBackColor = true;
-            // 
-            // Button_SelectExistingIDE
-            // 
-            this.Button_SelectExistingIDE.Font = new System.Drawing.Font("VCR OSD Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.Button_SelectExistingIDE.Location = new System.Drawing.Point(230, 51);
-            this.Button_SelectExistingIDE.Name = "Button_SelectExistingIDE";
-            this.Button_SelectExistingIDE.Size = new System.Drawing.Size(221, 42);
-            this.Button_SelectExistingIDE.TabIndex = 11;
-            this.Button_SelectExistingIDE.UseVisualStyleBackColor = true;
-            this.Button_SelectExistingIDE.Click += new System.EventHandler(this.Button_SelectExistingIDE_Click);
-            // 
-            // RadioButton_UseExistingIDE
-            // 
-            this.RadioButton_UseExistingIDE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RadioButton_UseExistingIDE.AutoSize = true;
-            this.RadioButton_UseExistingIDE.Location = new System.Drawing.Point(3, 51);
-            this.RadioButton_UseExistingIDE.Name = "RadioButton_UseExistingIDE";
-            this.RadioButton_UseExistingIDE.Size = new System.Drawing.Size(221, 42);
-            this.RadioButton_UseExistingIDE.TabIndex = 3;
-            this.RadioButton_UseExistingIDE.Text = "Use Existing";
-            this.RadioButton_UseExistingIDE.UseVisualStyleBackColor = true;
-            // 
-            // RadioButton_InstallNoIDE
-            // 
-            this.RadioButton_InstallNoIDE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RadioButton_InstallNoIDE.AutoSize = true;
-            this.RadioButton_InstallNoIDE.Checked = true;
-            this.RadioButton_InstallNoIDE.Location = new System.Drawing.Point(3, 99);
-            this.RadioButton_InstallNoIDE.Name = "RadioButton_InstallNoIDE";
-            this.RadioButton_InstallNoIDE.Size = new System.Drawing.Size(221, 44);
-            this.RadioButton_InstallNoIDE.TabIndex = 4;
-            this.RadioButton_InstallNoIDE.TabStop = true;
-            this.RadioButton_InstallNoIDE.Text = "Do Nothing";
-            this.RadioButton_InstallNoIDE.UseVisualStyleBackColor = true;
-            // 
-            // ComboBox_DownloadIDEType
-            // 
-            this.ComboBox_DownloadIDEType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ComboBox_DownloadIDEType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.ComboBox_DownloadIDEType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboBox_DownloadIDEType.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboBox_DownloadIDEType.FormattingEnabled = true;
-            this.ComboBox_DownloadIDEType.ItemHeight = 17;
-            this.ComboBox_DownloadIDEType.Items.AddRange(new object[] {
-            "Debian (64-bit)",
-            "Ubuntu (64-bit)"});
-            this.ComboBox_DownloadIDEType.Location = new System.Drawing.Point(230, 3);
-            this.ComboBox_DownloadIDEType.Name = "ComboBox_DownloadIDEType";
-            this.ComboBox_DownloadIDEType.Size = new System.Drawing.Size(221, 25);
-            this.ComboBox_DownloadIDEType.TabIndex = 13;
-            // 
-            // panel5
-            // 
-            this.panel5.AccessibleName = "IDE Settings";
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.tableLayoutPanel7);
-            this.panel5.Controls.Add(this.label27);
-            this.panel5.Location = new System.Drawing.Point(952, 273);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(230, 90);
-            this.panel5.TabIndex = 6;
-            // 
-            // label27
-            // 
-            this.label27.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.label27.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label27.Location = new System.Drawing.Point(0, 2);
-            this.label27.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(227, 21);
-            this.label27.TabIndex = 2;
-            this.label27.Text = "Final Settings";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel7
-            // 
-            this.tableLayoutPanel7.ColumnCount = 1;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Controls.Add(this.CheckBox_StartVM, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.Button_CreateVM, 0, 1);
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(-1, 26);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(230, 63);
-            this.tableLayoutPanel7.TabIndex = 3;
-            // 
-            // CheckBox_StartVM
-            // 
-            this.CheckBox_StartVM.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CheckBox_StartVM.Location = new System.Drawing.Point(3, 3);
-            this.CheckBox_StartVM.Name = "CheckBox_StartVM";
-            this.CheckBox_StartVM.Size = new System.Drawing.Size(224, 25);
-            this.CheckBox_StartVM.TabIndex = 0;
-            this.CheckBox_StartVM.Text = "Start Up VM";
-            this.CheckBox_StartVM.UseVisualStyleBackColor = true;
-            // 
-            // Button_CreateVM
-            // 
-            this.Button_CreateVM.Location = new System.Drawing.Point(3, 34);
-            this.Button_CreateVM.Name = "Button_CreateVM";
-            this.Button_CreateVM.Size = new System.Drawing.Size(223, 26);
-            this.Button_CreateVM.TabIndex = 1;
-            this.Button_CreateVM.Text = "Create New VM";
-            this.Button_CreateVM.UseVisualStyleBackColor = true;
-            this.Button_CreateVM.Click += new System.EventHandler(this.Button_CreateVM_Click);
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -1106,6 +1126,8 @@ namespace MuchosDicenDique
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_VideoMemory)).EndInit();
@@ -1117,13 +1139,11 @@ namespace MuchosDicenDique
             this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_CreateVirtualDiskSize)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -7,7 +7,6 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using HtmlAgilityPack;
 using Microsoft.WindowsAPICodePack.Net;
 
@@ -24,7 +23,7 @@ namespace MuchosDicenDique
         {
             LoadVirtualBoxVersion();
             LoadNetworkData();
-            ShowVMInfo(ListAllVMs()[0]);
+            //ShowVMInfo(ListAllVMs()[0]);
             //ShowVMInfo(ListAllVMs()[1]);
             //ShowVMInfo(ListAllVMs()[2]);
             //CreateVM("test", "Ubuntu_64", "C:\\Users\\pablo\\Downloads\\ubuntu-mate-22.04.2-desktop-amd64.iso");
@@ -126,7 +125,7 @@ namespace MuchosDicenDique
             return returnArr;
         }
         void ShowVMInfo(string _name) { Console.WriteLine(RunVBoxCommand($"showvminfo \"{_name}\" --machinereadable")); }
-        public void CreateVM(string _baseRoute, string _name, string _osType, int _diskMemory, string _diskType, string _diskRoute, string _ideRoute, string _ideOsType, int _memory, int _cores, string _gfxController, int _gfxMemory, bool _startVM)
+        public void CreateVM(string _baseRoute, string _name, string _osType, int _diskMemory, string _diskType, string _diskRoute, string _ideRoute, string _ideOsType, int _memory, int _cores, string _gfxController, int _gfxMemory, string _netController, bool _startVM)
         {
             // Get IDE ISO From Mirror
             Task isoTask = Task.Factory.StartNew(() =>
@@ -171,15 +170,17 @@ namespace MuchosDicenDique
                     //if (!File.Exists(_ideRoute)) { using (WebClient wc = new WebClient()) { wc.DownloadFile(url, _ideRoute); } }
                 }
             });
+            Console.WriteLine("Creando máquina...");
             // Create New VM
-            RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{_osType}\" --register --basefolder {_baseRoute}");
+            RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{"Ubuntu_64"}\" --register --basefolder \"{_baseRoute}\"");
+            Console.WriteLine("Máquina creada!");
             // Enable I/O APIC
             RunVBoxCommand($"modifyvm \"{_name}\" --ioapic on");
             // GFX Settings
             RunVBoxCommand($"modifyvm \"{_name}\" --graphicscontroller {_gfxController}");
             RunVBoxCommand($"modifyvm \"{_name}\" --cpus {_cores} --memory {_memory} --vram {_gfxMemory}");
             // Net Settings
-            RunVBoxCommand($"modifyvm \"{_name}\" --nic1 nat");
+            RunVBoxCommand($"modifyvm \"{_name}\" --nic1 {_netController}");
             // Hard Disk Settings
             if (string.IsNullOrEmpty(_diskRoute))
             {
