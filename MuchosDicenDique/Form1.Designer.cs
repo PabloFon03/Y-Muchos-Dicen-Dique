@@ -29,6 +29,7 @@ namespace MuchosDicenDique
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.Label_IPHost = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -53,6 +54,7 @@ namespace MuchosDicenDique
             this.Label_IPGateway = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.DataGridView_LogPanel = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.CheckBox_StartVM = new System.Windows.Forms.CheckBox();
@@ -60,7 +62,7 @@ namespace MuchosDicenDique
             this.label27 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.ComboBox_NewVMNetController = new System.Windows.Forms.ComboBox();
             this.ComboBox_NewVMGraphicsController = new System.Windows.Forms.ComboBox();
             this.NumericUpDown_VideoMemory = new System.Windows.Forms.NumericUpDown();
             this.NumericUpDown_CPUCores = new System.Windows.Forms.NumericUpDown();
@@ -103,9 +105,11 @@ namespace MuchosDicenDique
             this.Button_SelectVMLocation = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_LogPanel)).BeginInit();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -415,6 +419,7 @@ namespace MuchosDicenDique
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.DataGridView_LogPanel);
             this.tabPage1.Controls.Add(this.panel5);
             this.tabPage1.Controls.Add(this.panel4);
             this.tabPage1.Controls.Add(this.panel3);
@@ -427,6 +432,36 @@ namespace MuchosDicenDique
             this.tabPage1.Size = new System.Drawing.Size(1192, 371);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create VM";
+            // 
+            // DataGridView_LogPanel
+            // 
+            this.DataGridView_LogPanel.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.DataGridView_LogPanel.ColumnHeadersHeight = 29;
+            this.DataGridView_LogPanel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DataGridView_LogPanel.ColumnHeadersVisible = false;
+            this.DataGridView_LogPanel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridView_LogPanel.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridView_LogPanel.GridColor = System.Drawing.SystemColors.AppWorkspace;
+            this.DataGridView_LogPanel.Location = new System.Drawing.Point(952, 8);
+            this.DataGridView_LogPanel.Name = "DataGridView_LogPanel";
+            this.DataGridView_LogPanel.RowHeadersVisible = false;
+            this.DataGridView_LogPanel.RowHeadersWidth = 50;
+            this.DataGridView_LogPanel.RowTemplate.Height = 24;
+            this.DataGridView_LogPanel.RowTemplate.ReadOnly = true;
+            this.DataGridView_LogPanel.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridView_LogPanel.ShowCellErrors = false;
+            this.DataGridView_LogPanel.ShowCellToolTips = false;
+            this.DataGridView_LogPanel.ShowRowErrors = false;
+            this.DataGridView_LogPanel.Size = new System.Drawing.Size(230, 259);
+            this.DataGridView_LogPanel.TabIndex = 7;
             // 
             // panel5
             // 
@@ -504,7 +539,7 @@ namespace MuchosDicenDique
             this.tableLayoutPanel5.ColumnCount = 2;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Controls.Add(this.comboBox3, 1, 4);
+            this.tableLayoutPanel5.Controls.Add(this.ComboBox_NewVMNetController, 1, 4);
             this.tableLayoutPanel5.Controls.Add(this.ComboBox_NewVMGraphicsController, 1, 3);
             this.tableLayoutPanel5.Controls.Add(this.NumericUpDown_VideoMemory, 1, 2);
             this.tableLayoutPanel5.Controls.Add(this.NumericUpDown_CPUCores, 1, 1);
@@ -525,19 +560,25 @@ namespace MuchosDicenDique
             this.tableLayoutPanel5.Size = new System.Drawing.Size(454, 146);
             this.tableLayoutPanel5.TabIndex = 3;
             // 
-            // comboBox3
+            // ComboBox_NewVMNetController
             // 
-            this.comboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox3.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.ComboBox_NewVMNetController.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.ComboBox_NewVMNetController.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ComboBox_NewVMNetController.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox_NewVMNetController.FormattingEnabled = true;
+            this.ComboBox_NewVMNetController.Items.AddRange(new object[] {
             "None",
-            "NAT"});
-            this.comboBox3.Location = new System.Drawing.Point(230, 119);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(221, 25);
-            this.comboBox3.TabIndex = 12;
+            "NAT",
+            "Bridged",
+            "Internal Network",
+            "Host Only",
+            "Generic",
+            "NAT Network"});
+            this.ComboBox_NewVMNetController.Location = new System.Drawing.Point(230, 119);
+            this.ComboBox_NewVMNetController.Name = "ComboBox_NewVMNetController";
+            this.ComboBox_NewVMNetController.Size = new System.Drawing.Size(221, 25);
+            this.ComboBox_NewVMNetController.TabIndex = 12;
+            this.ComboBox_NewVMNetController.SelectedIndexChanged += new System.EventHandler(this.ComboBox_NewVMNetController_SelectedIndexChanged);
             // 
             // ComboBox_NewVMGraphicsController
             // 
@@ -1108,6 +1149,17 @@ namespace MuchosDicenDique
             this.tabPage2.Text = "List VMs";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column1.HeaderText = "Column1";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column1.Width = 227;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -1126,6 +1178,7 @@ namespace MuchosDicenDique
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_LogPanel)).EndInit();
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -1210,7 +1263,7 @@ namespace MuchosDicenDique
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.NumericUpDown NumericUpDown_VideoMemory;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox ComboBox_NewVMNetController;
         private System.Windows.Forms.ComboBox ComboBox_NewVMGraphicsController;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.RadioButton RadioButton_DownloadLatestIDE;
@@ -1223,5 +1276,7 @@ namespace MuchosDicenDique
         private System.Windows.Forms.CheckBox CheckBox_StartVM;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button Button_CreateVM;
+        private System.Windows.Forms.DataGridView DataGridView_LogPanel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

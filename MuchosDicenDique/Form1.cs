@@ -21,6 +21,11 @@ namespace MuchosDicenDique
         private void Form1_Load(object sender, EventArgs e)
         {
             Entrega1();
+            ComboBox_NewVMOSType.SelectedIndex = 6;
+            ComboBox_NewVMOSVersion.SelectedIndex = 6;
+            ComboBox_CreateNewDiskFormat.SelectedIndex = 0;
+            ComboBox_NewVMGraphicsController.SelectedIndex = 1;
+            ComboBox_NewVMNetController.SelectedIndex = 1;
         }
         #region [Entrega 1]
         void Entrega1()
@@ -370,8 +375,8 @@ namespace MuchosDicenDique
                     break;
             }
             osType = osVersionArr[ComboBox_NewVMOSVersion.SelectedIndex];
-            Console.WriteLine(osType);
         }
+        string GetComboBoxSelectedText(ComboBox _cbox, string _defVal = "") { return _cbox.SelectedItem is null ? _defVal : _cbox.SelectedItem.ToString(); }
         string TruncatePath(string _path) { return _path.Length > 24 ? _path.Substring(0, 21) + "..." : _path; }
         private void Button_SelectVMLocation_Click(object sender, EventArgs e)
         {
@@ -405,12 +410,16 @@ namespace MuchosDicenDique
         }
         private void ComboBox_NewVMGraphicsController_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selection = ComboBox_NewVMGraphicsController.SelectedItem.ToString();
+            string selection = GetComboBoxSelectedText(ComboBox_NewVMGraphicsController);
             gfxController = selection == "None" ? "null" : selection.ToLower();
+        }
+        private void ComboBox_NewVMNetController_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            netController = new string[] { "null", "nat", "bridged", "intnet", "hostonly", "generic", "natnetwork" }[ComboBox_NewVMNetController.SelectedIndex];
         }
         private void Button_CreateVM_Click(object sender, EventArgs e)
         {
-            netController = "nat";
+            Button_CreateVM.Enabled = false;
             manager.CreateVM
             (
                 // Base Route
@@ -422,13 +431,13 @@ namespace MuchosDicenDique
                 // Virtual Disk Memory
                 RadioButton_CreateNewDisk.Checked ? (int)NumericUpDown_CreateVirtualDiskSize.Value : -1,
                 // Virtual Disk Type
-                ComboBox_CreateNewDiskFormat.SelectedText,
+                GetComboBoxSelectedText(ComboBox_CreateNewDiskFormat),
                 // Virtual Disk Route
                 RadioButton_UseExistingDisk.Checked ? vmDiskPath : "",
                 // IDE Route
                 RadioButton_UseExistingIDE.Checked ? vmIdePath : "",
                 // IDE Download OS
-                RadioButton_DownloadLatestIDE.Checked ? ComboBox_DownloadIDEType.SelectedText : "",
+                RadioButton_DownloadLatestIDE.Checked ? GetComboBoxSelectedText(ComboBox_DownloadIDEType) : "",
                 // RAM Memory
                 (int)NumericUpDown_RAMMemory.Value,
                 // CPU Cores
@@ -440,8 +449,11 @@ namespace MuchosDicenDique
                 // Net Controller
                 netController,
                 // Start Up VM
-                CheckBox_StartVM.Checked
+                CheckBox_StartVM.Checked,
+                // Log Panel Reference
+                DataGridView_LogPanel
             );
+            Button_CreateVM.Enabled = true;
         }
         #endregion
     }
