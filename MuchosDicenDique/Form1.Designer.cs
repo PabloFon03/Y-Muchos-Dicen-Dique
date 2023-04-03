@@ -30,6 +30,7 @@ namespace MuchosDicenDique
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.Label_IPHost = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -55,6 +56,7 @@ namespace MuchosDicenDique
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.DataGridView_LogPanel = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.CheckBox_StartVM = new System.Windows.Forms.CheckBox();
@@ -105,7 +107,9 @@ namespace MuchosDicenDique
             this.Button_SelectVMLocation = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.DataGridView_VMsList = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -125,6 +129,9 @@ namespace MuchosDicenDique
             this.tableLayoutPanel6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_VMsList)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -435,6 +442,10 @@ namespace MuchosDicenDique
             // 
             // DataGridView_LogPanel
             // 
+            this.DataGridView_LogPanel.AllowUserToAddRows = false;
+            this.DataGridView_LogPanel.AllowUserToDeleteRows = false;
+            this.DataGridView_LogPanel.AllowUserToResizeRows = false;
+            this.DataGridView_LogPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.DataGridView_LogPanel.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.DataGridView_LogPanel.ColumnHeadersHeight = 29;
             this.DataGridView_LogPanel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -451,9 +462,12 @@ namespace MuchosDicenDique
             this.DataGridView_LogPanel.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridView_LogPanel.GridColor = System.Drawing.SystemColors.AppWorkspace;
             this.DataGridView_LogPanel.Location = new System.Drawing.Point(952, 8);
+            this.DataGridView_LogPanel.MultiSelect = false;
             this.DataGridView_LogPanel.Name = "DataGridView_LogPanel";
+            this.DataGridView_LogPanel.ReadOnly = true;
             this.DataGridView_LogPanel.RowHeadersVisible = false;
             this.DataGridView_LogPanel.RowHeadersWidth = 50;
+            this.DataGridView_LogPanel.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DataGridView_LogPanel.RowTemplate.Height = 24;
             this.DataGridView_LogPanel.RowTemplate.ReadOnly = true;
             this.DataGridView_LogPanel.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -462,6 +476,17 @@ namespace MuchosDicenDique
             this.DataGridView_LogPanel.ShowRowErrors = false;
             this.DataGridView_LogPanel.Size = new System.Drawing.Size(230, 259);
             this.DataGridView_LogPanel.TabIndex = 7;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column1.HeaderText = "Column1";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column1.Width = 400;
             // 
             // panel5
             // 
@@ -1141,6 +1166,7 @@ namespace MuchosDicenDique
             // tabPage2
             // 
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage2.Controls.Add(this.panel6);
             this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -1148,17 +1174,63 @@ namespace MuchosDicenDique
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "List VMs";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
             // 
-            // Column1
+            // panel6
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column1.HeaderText = "Column1";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column1.Width = 227;
+            this.panel6.Controls.Add(this.DataGridView_VMsList);
+            this.panel6.Location = new System.Drawing.Point(6, 6);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1176, 355);
+            this.panel6.TabIndex = 0;
+            // 
+            // DataGridView_VMsList
+            // 
+            this.DataGridView_VMsList.AllowUserToAddRows = false;
+            this.DataGridView_VMsList.AllowUserToDeleteRows = false;
+            this.DataGridView_VMsList.AllowUserToResizeRows = false;
+            this.DataGridView_VMsList.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.DataGridView_VMsList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.DataGridView_VMsList.ColumnHeadersHeight = 29;
+            this.DataGridView_VMsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DataGridView_VMsList.ColumnHeadersVisible = false;
+            this.DataGridView_VMsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridView_VMsList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DataGridView_VMsList.GridColor = System.Drawing.SystemColors.AppWorkspace;
+            this.DataGridView_VMsList.Location = new System.Drawing.Point(3, 3);
+            this.DataGridView_VMsList.MultiSelect = false;
+            this.DataGridView_VMsList.Name = "DataGridView_VMsList";
+            this.DataGridView_VMsList.ReadOnly = true;
+            this.DataGridView_VMsList.RowHeadersVisible = false;
+            this.DataGridView_VMsList.RowHeadersWidth = 50;
+            this.DataGridView_VMsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.DataGridView_VMsList.RowTemplate.Height = 24;
+            this.DataGridView_VMsList.RowTemplate.ReadOnly = true;
+            this.DataGridView_VMsList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridView_VMsList.ShowCellErrors = false;
+            this.DataGridView_VMsList.ShowCellToolTips = false;
+            this.DataGridView_VMsList.ShowRowErrors = false;
+            this.DataGridView_VMsList.Size = new System.Drawing.Size(1170, 349);
+            this.DataGridView_VMsList.TabIndex = 8;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Column1";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 400;
             // 
             // Form1
             // 
@@ -1197,6 +1269,9 @@ namespace MuchosDicenDique
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_VMsList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1278,5 +1353,8 @@ namespace MuchosDicenDique
         private System.Windows.Forms.Button Button_CreateVM;
         private System.Windows.Forms.DataGridView DataGridView_LogPanel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.DataGridView DataGridView_VMsList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }
 }

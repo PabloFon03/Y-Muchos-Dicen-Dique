@@ -455,6 +455,10 @@ namespace MuchosDicenDique
             );
             Button_CreateVM.Enabled = true;
         }
+        private void tabPage2_Enter(object sender, EventArgs e)
+        {
+            manager.DisplayVMList(DataGridView_VMsList);
+        }
         #endregion
     }
 }

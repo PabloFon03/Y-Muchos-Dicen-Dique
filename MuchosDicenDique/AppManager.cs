@@ -265,6 +265,11 @@ namespace MuchosDicenDique
             }
             _logPanel.Rows.Add("All done!");
         }
+        public void DisplayVMList(DataGridView _vmPanel)
+        {
+            _vmPanel.Rows.Clear();
+            foreach (string name in ListAllVMs()) { _vmPanel.Rows.Add(name); }
+        }
         #endregion
     }
 }
