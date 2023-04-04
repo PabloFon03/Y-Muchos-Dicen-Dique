@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace MuchosDicenDique
@@ -387,9 +389,18 @@ namespace MuchosDicenDique
                 Button_SelectVMLocation.Text = TruncatePath(vmPath);
             }
         }
+        private void RadioButton_CreateNewDisk_CheckedChanged(object sender, EventArgs e)
+        {
+            tableLayoutPanel4.Enabled = RadioButton_CreateNewDisk.Checked;
+        }
+        private void RadioButton_UseExistingDisk_CheckedChanged(object sender, EventArgs e)
+        {
+            Button_SelectVMDisk.Enabled = RadioButton_UseExistingDisk.Checked;
+        }
         private void Button_SelectVMDisk_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "VirtualBox Disk Image Files|*.vdi|Virtual Hard Disk Files|*.vhd|Virtual Machine Disk Files|*.vmdk";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 Console.WriteLine(fileDialog.FileName);
@@ -397,10 +408,18 @@ namespace MuchosDicenDique
                 Button_SelectVMDisk.Text = TruncatePath(vmDiskPath);
             }
         }
+        private void RadioButton_DownloadLatestIDE_CheckedChanged(object sender, EventArgs e)
+        {
+            ComboBox_DownloadIDEType.Enabled = RadioButton_DownloadLatestIDE.Checked;
+        }
+        private void RadioButton_UseExistingIDE_CheckedChanged(object sender, EventArgs e)
+        {
+            Button_SelectExistingIDE.Enabled = RadioButton_UseExistingIDE.Checked;
+        }
         private void Button_SelectExistingIDE_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "ISO Disk Files|*.iso";
+            fileDialog.Filter = "ISO Disk Image Files|*.iso";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 Console.WriteLine(fileDialog.FileName);
@@ -419,41 +438,72 @@ namespace MuchosDicenDique
         }
         private void Button_CreateVM_Click(object sender, EventArgs e)
         {
-            Button_CreateVM.Enabled = false;
-            manager.CreateVM
-            (
-                // Base Route
-                vmPath,
-                // Name
-                TextBox_NewVMName.Text,
-                // OS Type
-                osType,
-                // Virtual Disk Memory
-                RadioButton_CreateNewDisk.Checked ? (int)NumericUpDown_CreateVirtualDiskSize.Value : -1,
-                // Virtual Disk Type
-                GetComboBoxSelectedText(ComboBox_CreateNewDiskFormat),
-                // Virtual Disk Route
-                RadioButton_UseExistingDisk.Checked ? vmDiskPath : "",
-                // IDE Route
-                RadioButton_UseExistingIDE.Checked ? vmIdePath : "",
-                // IDE Download OS
-                RadioButton_DownloadLatestIDE.Checked ? GetComboBoxSelectedText(ComboBox_DownloadIDEType) : "",
-                // RAM Memory
-                (int)NumericUpDown_RAMMemory.Value,
-                // CPU Cores
-                (int)NumericUpDown_CPUCores.Value,
-                // GFX Controller
-                gfxController,
-                // Video Memory
-                (int)NumericUpDown_VideoMemory.Value,
-                // Net Controller
-                netController,
-                // Start Up VM
-                CheckBox_StartVM.Checked,
-                // Log Panel Reference
-                DataGridView_LogPanel
-            );
-            Button_CreateVM.Enabled = true;
+            if (CanCreateVM())
+            {
+                Button_CreateVM.Enabled = false;
+                Panel[] panels = new Panel[] { panel1, panel2, panel3, panel4, panel5 };
+                foreach (Panel panel in panels) { panel.Enabled = false; }
+                manager.CreateVM
+                (
+                    // Base Route
+                    vmPath,
+                    // Name
+                    TextBox_NewVMName.Text,
+                    // OS Type
+                    osType,
+                    // Virtual Disk Memory
+                    RadioButton_CreateNewDisk.Checked ? (int)NumericUpDown_CreateVirtualDiskSize.Value : -1,
+                    // Virtual Disk Type
+                    GetComboBoxSelectedText(ComboBox_CreateNewDiskFormat),
+                    // Virtual Disk Route
+                    RadioButton_UseExistingDisk.Checked ? vmDiskPath : "",
+                    // IDE Route
+                    RadioButton_UseExistingIDE.Checked ? vmIdePath : "",
+                    // IDE Download OS
+                    RadioButton_DownloadLatestIDE.Checked ? GetComboBoxSelectedText(ComboBox_DownloadIDEType) : "",
+                    // RAM Memory
+                    (int)NumericUpDown_RAMMemory.Value,
+                    // CPU Cores
+                    (int)NumericUpDown_CPUCores.Value,
+                    // GFX Controller
+                    gfxController,
+                    // Video Memory
+                    (int)NumericUpDown_VideoMemory.Value,
+                    // Net Controller
+                    netController,
+                    // Start Up VM
+                    CheckBox_StartVM.Checked,
+                    // Log Panel Reference
+                    DataGridView_LogPanel
+                );
+                foreach (Panel panel in panels) { panel.Enabled = true; }
+            }
+        }
+        bool CanCreateVM()
+        {
+            List<string> errors = new List<string>();
+            // VM Name
+            if (string.IsNullOrWhiteSpace(TextBox_NewVMName.Text)) { errors.Add("Error: name can't be empty!"); }
+            else if (manager.VMExists(TextBox_NewVMName.Text)) { errors.Add("Error: name already registered!"); }
+            else if (Regex.Match(TextBox_NewVMName.Text, @"[^\w ]").Success) { errors.Add("Error: name can only contain [A-z], [0-9], '_' and ' '"); }
+            // VM Directory
+            if (string.IsNullOrWhiteSpace(vmPath)) { errors.Add($"Error: VM directory can't be empty!"); }
+            else if (!System.IO.Directory.Exists(vmPath)) { errors.Add($"Error: VM directory '{vmPath}' can't be found!"); }
+            // VM Disk Path
+            if (Button_SelectVMDisk.Enabled)
+            {
+                if (string.IsNullOrWhiteSpace(vmDiskPath)) { errors.Add($"Error: disk file route can't be empty!"); }
+                else if (!System.IO.Directory.Exists(vmDiskPath)) { errors.Add($"Error: disk file '{vmDiskPath}' can't be found!"); }
+            }
+            // VM IDE Path
+            if (Button_SelectExistingIDE.Enabled)
+            {
+                if (string.IsNullOrWhiteSpace(vmIdePath)) { errors.Add($"Error: ISO file route can't be empty!"); }
+                else if (!System.IO.Directory.Exists(vmIdePath)) { errors.Add($"Error: ISO file '{vmIdePath}' can't be found!"); }
+            }
+            DataGridView_LogPanel.Rows.Clear();
+            foreach (string error in errors) { DataGridView_LogPanel.Rows.Add(error); }
+            return errors.Count == 0;
         }
         private void tabPage2_Enter(object sender, EventArgs e)
         {

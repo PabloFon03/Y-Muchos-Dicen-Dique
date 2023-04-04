@@ -29,8 +29,8 @@ namespace MuchosDicenDique
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.Label_IPHost = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -388,7 +388,7 @@ namespace MuchosDicenDique
             // 
             // Label_VBInstalled
             // 
-            this.Label_VBInstalled.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.Label_VBInstalled.Font = new System.Drawing.Font("VCR OSD Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.Label_VBInstalled.Location = new System.Drawing.Point(1085, 0);
             this.Label_VBInstalled.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.Label_VBInstalled.Name = "Label_VBInstalled";
@@ -413,7 +413,7 @@ namespace MuchosDicenDique
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(20, 206);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
@@ -432,11 +432,11 @@ namespace MuchosDicenDique
             this.tabPage1.Controls.Add(this.panel3);
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 30);
+            this.tabPage1.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1192, 371);
+            this.tabPage1.Size = new System.Drawing.Size(1192, 373);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create VM";
             // 
@@ -452,16 +452,16 @@ namespace MuchosDicenDique
             this.DataGridView_LogPanel.ColumnHeadersVisible = false;
             this.DataGridView_LogPanel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DataGridView_LogPanel.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.AppWorkspace;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridView_LogPanel.DefaultCellStyle = dataGridViewCellStyle11;
             this.DataGridView_LogPanel.GridColor = System.Drawing.SystemColors.AppWorkspace;
-            this.DataGridView_LogPanel.Location = new System.Drawing.Point(952, 8);
+            this.DataGridView_LogPanel.Location = new System.Drawing.Point(841, 10);
             this.DataGridView_LogPanel.MultiSelect = false;
             this.DataGridView_LogPanel.Name = "DataGridView_LogPanel";
             this.DataGridView_LogPanel.ReadOnly = true;
@@ -474,7 +474,7 @@ namespace MuchosDicenDique
             this.DataGridView_LogPanel.ShowCellErrors = false;
             this.DataGridView_LogPanel.ShowCellToolTips = false;
             this.DataGridView_LogPanel.ShowRowErrors = false;
-            this.DataGridView_LogPanel.Size = new System.Drawing.Size(230, 259);
+            this.DataGridView_LogPanel.Size = new System.Drawing.Size(341, 259);
             this.DataGridView_LogPanel.TabIndex = 7;
             // 
             // Column1
@@ -486,7 +486,7 @@ namespace MuchosDicenDique
             this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column1.Width = 400;
+            this.Column1.Width = 500;
             // 
             // panel5
             // 
@@ -494,9 +494,9 @@ namespace MuchosDicenDique
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.tableLayoutPanel7);
             this.panel5.Controls.Add(this.label27);
-            this.panel5.Location = new System.Drawing.Point(952, 273);
+            this.panel5.Location = new System.Drawing.Point(842, 273);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(230, 90);
+            this.panel5.Size = new System.Drawing.Size(340, 90);
             this.panel5.TabIndex = 6;
             // 
             // tableLayoutPanel7
@@ -511,7 +511,7 @@ namespace MuchosDicenDique
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(230, 63);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(336, 63);
             this.tableLayoutPanel7.TabIndex = 3;
             // 
             // CheckBox_StartVM
@@ -521,7 +521,7 @@ namespace MuchosDicenDique
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CheckBox_StartVM.Location = new System.Drawing.Point(3, 3);
             this.CheckBox_StartVM.Name = "CheckBox_StartVM";
-            this.CheckBox_StartVM.Size = new System.Drawing.Size(224, 25);
+            this.CheckBox_StartVM.Size = new System.Drawing.Size(330, 25);
             this.CheckBox_StartVM.TabIndex = 0;
             this.CheckBox_StartVM.Text = "Start Up VM";
             this.CheckBox_StartVM.UseVisualStyleBackColor = true;
@@ -530,7 +530,7 @@ namespace MuchosDicenDique
             // 
             this.Button_CreateVM.Location = new System.Drawing.Point(3, 34);
             this.Button_CreateVM.Name = "Button_CreateVM";
-            this.Button_CreateVM.Size = new System.Drawing.Size(223, 26);
+            this.Button_CreateVM.Size = new System.Drawing.Size(330, 26);
             this.Button_CreateVM.TabIndex = 1;
             this.Button_CreateVM.Text = "Create New VM";
             this.Button_CreateVM.UseVisualStyleBackColor = true;
@@ -543,7 +543,7 @@ namespace MuchosDicenDique
             this.label27.Location = new System.Drawing.Point(0, 2);
             this.label27.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(227, 21);
+            this.label27.Size = new System.Drawing.Size(339, 21);
             this.label27.TabIndex = 2;
             this.label27.Text = "Final Settings";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -554,16 +554,16 @@ namespace MuchosDicenDique
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.tableLayoutPanel5);
             this.panel4.Controls.Add(this.label19);
-            this.panel4.Location = new System.Drawing.Point(482, 188);
+            this.panel4.Location = new System.Drawing.Point(423, 188);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(462, 175);
+            this.panel4.Size = new System.Drawing.Size(410, 175);
             this.panel4.TabIndex = 4;
             // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.22785F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.77215F));
             this.tableLayoutPanel5.Controls.Add(this.ComboBox_NewVMNetController, 1, 4);
             this.tableLayoutPanel5.Controls.Add(this.ComboBox_NewVMGraphicsController, 1, 3);
             this.tableLayoutPanel5.Controls.Add(this.NumericUpDown_VideoMemory, 1, 2);
@@ -582,14 +582,14 @@ namespace MuchosDicenDique
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(454, 146);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(395, 146);
             this.tableLayoutPanel5.TabIndex = 3;
             // 
             // ComboBox_NewVMNetController
             // 
             this.ComboBox_NewVMNetController.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.ComboBox_NewVMNetController.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboBox_NewVMNetController.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox_NewVMNetController.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.ComboBox_NewVMNetController.FormattingEnabled = true;
             this.ComboBox_NewVMNetController.Items.AddRange(new object[] {
             "None",
@@ -599,9 +599,9 @@ namespace MuchosDicenDique
             "Host Only",
             "Generic",
             "NAT Network"});
-            this.ComboBox_NewVMNetController.Location = new System.Drawing.Point(230, 119);
+            this.ComboBox_NewVMNetController.Location = new System.Drawing.Point(233, 119);
             this.ComboBox_NewVMNetController.Name = "ComboBox_NewVMNetController";
-            this.ComboBox_NewVMNetController.Size = new System.Drawing.Size(221, 25);
+            this.ComboBox_NewVMNetController.Size = new System.Drawing.Size(159, 24);
             this.ComboBox_NewVMNetController.TabIndex = 12;
             this.ComboBox_NewVMNetController.SelectedIndexChanged += new System.EventHandler(this.ComboBox_NewVMNetController_SelectedIndexChanged);
             // 
@@ -609,29 +609,29 @@ namespace MuchosDicenDique
             // 
             this.ComboBox_NewVMGraphicsController.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.ComboBox_NewVMGraphicsController.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboBox_NewVMGraphicsController.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox_NewVMGraphicsController.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.ComboBox_NewVMGraphicsController.FormattingEnabled = true;
             this.ComboBox_NewVMGraphicsController.Items.AddRange(new object[] {
             "VBoxVGA",
             "VMSVGA",
             "VBoxSVGA",
             "None"});
-            this.ComboBox_NewVMGraphicsController.Location = new System.Drawing.Point(230, 90);
+            this.ComboBox_NewVMGraphicsController.Location = new System.Drawing.Point(233, 90);
             this.ComboBox_NewVMGraphicsController.Name = "ComboBox_NewVMGraphicsController";
-            this.ComboBox_NewVMGraphicsController.Size = new System.Drawing.Size(221, 25);
+            this.ComboBox_NewVMGraphicsController.Size = new System.Drawing.Size(159, 24);
             this.ComboBox_NewVMGraphicsController.TabIndex = 11;
             this.ComboBox_NewVMGraphicsController.SelectedIndexChanged += new System.EventHandler(this.ComboBox_NewVMGraphicsController_SelectedIndexChanged);
             // 
             // NumericUpDown_VideoMemory
             // 
-            this.NumericUpDown_VideoMemory.Location = new System.Drawing.Point(230, 61);
+            this.NumericUpDown_VideoMemory.Location = new System.Drawing.Point(233, 61);
             this.NumericUpDown_VideoMemory.Maximum = new decimal(new int[] {
             128,
             0,
             0,
             0});
             this.NumericUpDown_VideoMemory.Name = "NumericUpDown_VideoMemory";
-            this.NumericUpDown_VideoMemory.Size = new System.Drawing.Size(221, 24);
+            this.NumericUpDown_VideoMemory.Size = new System.Drawing.Size(159, 22);
             this.NumericUpDown_VideoMemory.TabIndex = 12;
             this.NumericUpDown_VideoMemory.Value = new decimal(new int[] {
             32,
@@ -641,14 +641,14 @@ namespace MuchosDicenDique
             // 
             // NumericUpDown_CPUCores
             // 
-            this.NumericUpDown_CPUCores.Location = new System.Drawing.Point(230, 32);
+            this.NumericUpDown_CPUCores.Location = new System.Drawing.Point(233, 32);
             this.NumericUpDown_CPUCores.Maximum = new decimal(new int[] {
             32,
             0,
             0,
             0});
             this.NumericUpDown_CPUCores.Name = "NumericUpDown_CPUCores";
-            this.NumericUpDown_CPUCores.Size = new System.Drawing.Size(221, 24);
+            this.NumericUpDown_CPUCores.Size = new System.Drawing.Size(159, 22);
             this.NumericUpDown_CPUCores.TabIndex = 8;
             this.NumericUpDown_CPUCores.Value = new decimal(new int[] {
             2,
@@ -675,21 +675,21 @@ namespace MuchosDicenDique
             this.label22.Location = new System.Drawing.Point(5, 0);
             this.label22.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(217, 29);
+            this.label22.Size = new System.Drawing.Size(220, 29);
             this.label22.TabIndex = 6;
             this.label22.Text = "RAM Size (MB):";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NumericUpDown_RAMMemory
             // 
-            this.NumericUpDown_RAMMemory.Location = new System.Drawing.Point(230, 3);
+            this.NumericUpDown_RAMMemory.Location = new System.Drawing.Point(233, 3);
             this.NumericUpDown_RAMMemory.Maximum = new decimal(new int[] {
             32768,
             0,
             0,
             0});
             this.NumericUpDown_RAMMemory.Name = "NumericUpDown_RAMMemory";
-            this.NumericUpDown_RAMMemory.Size = new System.Drawing.Size(221, 24);
+            this.NumericUpDown_RAMMemory.Size = new System.Drawing.Size(159, 22);
             this.NumericUpDown_RAMMemory.TabIndex = 7;
             this.NumericUpDown_RAMMemory.Value = new decimal(new int[] {
             2048,
@@ -740,7 +740,7 @@ namespace MuchosDicenDique
             this.label19.Location = new System.Drawing.Point(0, 2);
             this.label19.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(461, 21);
+            this.label19.Size = new System.Drawing.Size(350, 21);
             this.label19.TabIndex = 2;
             this.label19.Text = "Hardware Settings";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -753,14 +753,14 @@ namespace MuchosDicenDique
             this.panel3.Controls.Add(this.label18);
             this.panel3.Location = new System.Drawing.Point(8, 188);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(462, 175);
+            this.panel3.Size = new System.Drawing.Size(408, 175);
             this.panel3.TabIndex = 3;
             // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel3.Controls.Add(this.RadioButton_CreateNewDisk, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.Button_SelectVMDisk, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.RadioButton_UseExistingDisk, 0, 1);
@@ -772,7 +772,7 @@ namespace MuchosDicenDique
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(454, 146);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(400, 143);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // RadioButton_CreateNewDisk
@@ -783,18 +783,21 @@ namespace MuchosDicenDique
             this.RadioButton_CreateNewDisk.AutoSize = true;
             this.RadioButton_CreateNewDisk.Location = new System.Drawing.Point(3, 3);
             this.RadioButton_CreateNewDisk.Name = "RadioButton_CreateNewDisk";
-            this.RadioButton_CreateNewDisk.Size = new System.Drawing.Size(221, 67);
+            this.RadioButton_CreateNewDisk.Size = new System.Drawing.Size(167, 67);
             this.RadioButton_CreateNewDisk.TabIndex = 12;
             this.RadioButton_CreateNewDisk.Text = "Create New";
             this.RadioButton_CreateNewDisk.UseVisualStyleBackColor = true;
+            this.RadioButton_CreateNewDisk.CheckedChanged += new System.EventHandler(this.RadioButton_CreateNewDisk_CheckedChanged);
             // 
             // Button_SelectVMDisk
             // 
+            this.Button_SelectVMDisk.Enabled = false;
             this.Button_SelectVMDisk.Font = new System.Drawing.Font("VCR OSD Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.Button_SelectVMDisk.Location = new System.Drawing.Point(230, 76);
+            this.Button_SelectVMDisk.Location = new System.Drawing.Point(176, 76);
             this.Button_SelectVMDisk.Name = "Button_SelectVMDisk";
             this.Button_SelectVMDisk.Size = new System.Drawing.Size(221, 30);
             this.Button_SelectVMDisk.TabIndex = 11;
+            this.Button_SelectVMDisk.Text = "[Select File]";
             this.Button_SelectVMDisk.UseVisualStyleBackColor = true;
             this.Button_SelectVMDisk.Click += new System.EventHandler(this.Button_SelectVMDisk_Click);
             // 
@@ -806,10 +809,11 @@ namespace MuchosDicenDique
             this.RadioButton_UseExistingDisk.AutoSize = true;
             this.RadioButton_UseExistingDisk.Location = new System.Drawing.Point(3, 76);
             this.RadioButton_UseExistingDisk.Name = "RadioButton_UseExistingDisk";
-            this.RadioButton_UseExistingDisk.Size = new System.Drawing.Size(221, 30);
+            this.RadioButton_UseExistingDisk.Size = new System.Drawing.Size(167, 30);
             this.RadioButton_UseExistingDisk.TabIndex = 3;
             this.RadioButton_UseExistingDisk.Text = "Use Existing";
             this.RadioButton_UseExistingDisk.UseVisualStyleBackColor = true;
+            this.RadioButton_UseExistingDisk.CheckedChanged += new System.EventHandler(this.RadioButton_UseExistingDisk_CheckedChanged);
             // 
             // RadioButton_NoDisk
             // 
@@ -820,7 +824,7 @@ namespace MuchosDicenDique
             this.RadioButton_NoDisk.Checked = true;
             this.RadioButton_NoDisk.Location = new System.Drawing.Point(3, 112);
             this.RadioButton_NoDisk.Name = "RadioButton_NoDisk";
-            this.RadioButton_NoDisk.Size = new System.Drawing.Size(221, 31);
+            this.RadioButton_NoDisk.Size = new System.Drawing.Size(167, 31);
             this.RadioButton_NoDisk.TabIndex = 4;
             this.RadioButton_NoDisk.TabStop = true;
             this.RadioButton_NoDisk.Text = "Do Nothing";
@@ -835,7 +839,8 @@ namespace MuchosDicenDique
             this.tableLayoutPanel4.Controls.Add(this.label20, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label21, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.NumericUpDown_CreateVirtualDiskSize, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(230, 3);
+            this.tableLayoutPanel4.Enabled = false;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(176, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -848,7 +853,7 @@ namespace MuchosDicenDique
             // 
             this.ComboBox_CreateNewDiskFormat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.ComboBox_CreateNewDiskFormat.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboBox_CreateNewDiskFormat.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox_CreateNewDiskFormat.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.ComboBox_CreateNewDiskFormat.FormattingEnabled = true;
             this.ComboBox_CreateNewDiskFormat.Items.AddRange(new object[] {
             "VDI",
@@ -856,7 +861,7 @@ namespace MuchosDicenDique
             "VMDK"});
             this.ComboBox_CreateNewDiskFormat.Location = new System.Drawing.Point(113, 36);
             this.ComboBox_CreateNewDiskFormat.Name = "ComboBox_CreateNewDiskFormat";
-            this.ComboBox_CreateNewDiskFormat.Size = new System.Drawing.Size(104, 25);
+            this.ComboBox_CreateNewDiskFormat.Size = new System.Drawing.Size(104, 24);
             this.ComboBox_CreateNewDiskFormat.TabIndex = 10;
             // 
             // label20
@@ -892,7 +897,7 @@ namespace MuchosDicenDique
             0,
             0});
             this.NumericUpDown_CreateVirtualDiskSize.Name = "NumericUpDown_CreateVirtualDiskSize";
-            this.NumericUpDown_CreateVirtualDiskSize.Size = new System.Drawing.Size(104, 24);
+            this.NumericUpDown_CreateVirtualDiskSize.Size = new System.Drawing.Size(104, 22);
             this.NumericUpDown_CreateVirtualDiskSize.TabIndex = 5;
             this.NumericUpDown_CreateVirtualDiskSize.Value = new decimal(new int[] {
             32768,
@@ -907,7 +912,7 @@ namespace MuchosDicenDique
             this.label18.Location = new System.Drawing.Point(0, 2);
             this.label18.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(461, 21);
+            this.label18.Size = new System.Drawing.Size(403, 21);
             this.label18.TabIndex = 2;
             this.label18.Text = "Disk Settings";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -918,9 +923,9 @@ namespace MuchosDicenDique
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.tableLayoutPanel6);
             this.panel2.Controls.Add(this.label13);
-            this.panel2.Location = new System.Drawing.Point(482, 7);
+            this.panel2.Location = new System.Drawing.Point(423, 7);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(462, 175);
+            this.panel2.Size = new System.Drawing.Size(410, 175);
             this.panel2.TabIndex = 1;
             // 
             // tableLayoutPanel6
@@ -939,7 +944,7 @@ namespace MuchosDicenDique
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(454, 146);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(402, 146);
             this.tableLayoutPanel6.TabIndex = 5;
             // 
             // RadioButton_DownloadLatestIDE
@@ -950,18 +955,21 @@ namespace MuchosDicenDique
             this.RadioButton_DownloadLatestIDE.AutoSize = true;
             this.RadioButton_DownloadLatestIDE.Location = new System.Drawing.Point(3, 3);
             this.RadioButton_DownloadLatestIDE.Name = "RadioButton_DownloadLatestIDE";
-            this.RadioButton_DownloadLatestIDE.Size = new System.Drawing.Size(221, 42);
+            this.RadioButton_DownloadLatestIDE.Size = new System.Drawing.Size(195, 42);
             this.RadioButton_DownloadLatestIDE.TabIndex = 12;
             this.RadioButton_DownloadLatestIDE.Text = "Download Latest";
             this.RadioButton_DownloadLatestIDE.UseVisualStyleBackColor = true;
+            this.RadioButton_DownloadLatestIDE.CheckedChanged += new System.EventHandler(this.RadioButton_DownloadLatestIDE_CheckedChanged);
             // 
             // Button_SelectExistingIDE
             // 
+            this.Button_SelectExistingIDE.Enabled = false;
             this.Button_SelectExistingIDE.Font = new System.Drawing.Font("VCR OSD Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.Button_SelectExistingIDE.Location = new System.Drawing.Point(230, 51);
+            this.Button_SelectExistingIDE.Location = new System.Drawing.Point(204, 51);
             this.Button_SelectExistingIDE.Name = "Button_SelectExistingIDE";
-            this.Button_SelectExistingIDE.Size = new System.Drawing.Size(221, 42);
+            this.Button_SelectExistingIDE.Size = new System.Drawing.Size(195, 42);
             this.Button_SelectExistingIDE.TabIndex = 11;
+            this.Button_SelectExistingIDE.Text = "[Select File]";
             this.Button_SelectExistingIDE.UseVisualStyleBackColor = true;
             this.Button_SelectExistingIDE.Click += new System.EventHandler(this.Button_SelectExistingIDE_Click);
             // 
@@ -973,10 +981,11 @@ namespace MuchosDicenDique
             this.RadioButton_UseExistingIDE.AutoSize = true;
             this.RadioButton_UseExistingIDE.Location = new System.Drawing.Point(3, 51);
             this.RadioButton_UseExistingIDE.Name = "RadioButton_UseExistingIDE";
-            this.RadioButton_UseExistingIDE.Size = new System.Drawing.Size(221, 42);
+            this.RadioButton_UseExistingIDE.Size = new System.Drawing.Size(195, 42);
             this.RadioButton_UseExistingIDE.TabIndex = 3;
             this.RadioButton_UseExistingIDE.Text = "Use Existing";
             this.RadioButton_UseExistingIDE.UseVisualStyleBackColor = true;
+            this.RadioButton_UseExistingIDE.CheckedChanged += new System.EventHandler(this.RadioButton_UseExistingIDE_CheckedChanged);
             // 
             // RadioButton_InstallNoIDE
             // 
@@ -987,7 +996,7 @@ namespace MuchosDicenDique
             this.RadioButton_InstallNoIDE.Checked = true;
             this.RadioButton_InstallNoIDE.Location = new System.Drawing.Point(3, 99);
             this.RadioButton_InstallNoIDE.Name = "RadioButton_InstallNoIDE";
-            this.RadioButton_InstallNoIDE.Size = new System.Drawing.Size(221, 44);
+            this.RadioButton_InstallNoIDE.Size = new System.Drawing.Size(195, 44);
             this.RadioButton_InstallNoIDE.TabIndex = 4;
             this.RadioButton_InstallNoIDE.TabStop = true;
             this.RadioButton_InstallNoIDE.Text = "Do Nothing";
@@ -1000,15 +1009,16 @@ namespace MuchosDicenDique
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ComboBox_DownloadIDEType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.ComboBox_DownloadIDEType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboBox_DownloadIDEType.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox_DownloadIDEType.Enabled = false;
+            this.ComboBox_DownloadIDEType.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.ComboBox_DownloadIDEType.FormattingEnabled = true;
-            this.ComboBox_DownloadIDEType.ItemHeight = 17;
+            this.ComboBox_DownloadIDEType.ItemHeight = 16;
             this.ComboBox_DownloadIDEType.Items.AddRange(new object[] {
             "Debian (64-bit)",
             "Ubuntu (64-bit)"});
-            this.ComboBox_DownloadIDEType.Location = new System.Drawing.Point(230, 3);
+            this.ComboBox_DownloadIDEType.Location = new System.Drawing.Point(204, 3);
             this.ComboBox_DownloadIDEType.Name = "ComboBox_DownloadIDEType";
-            this.ComboBox_DownloadIDEType.Size = new System.Drawing.Size(221, 25);
+            this.ComboBox_DownloadIDEType.Size = new System.Drawing.Size(195, 24);
             this.ComboBox_DownloadIDEType.TabIndex = 13;
             // 
             // label13
@@ -1018,7 +1028,7 @@ namespace MuchosDicenDique
             this.label13.Location = new System.Drawing.Point(0, 2);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(461, 21);
+            this.label13.Size = new System.Drawing.Size(409, 21);
             this.label13.TabIndex = 2;
             this.label13.Text = "IDE Settings";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1031,14 +1041,14 @@ namespace MuchosDicenDique
             this.panel1.Controls.Add(this.label12);
             this.panel1.Location = new System.Drawing.Point(7, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(462, 175);
+            this.panel1.Size = new System.Drawing.Size(409, 175);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel2.Controls.Add(this.ComboBox_NewVMOSVersion, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label14, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label15, 0, 1);
@@ -1054,19 +1064,18 @@ namespace MuchosDicenDique
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(453, 143);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(400, 143);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // ComboBox_NewVMOSVersion
             // 
             this.ComboBox_NewVMOSVersion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.ComboBox_NewVMOSVersion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ComboBox_NewVMOSVersion.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox_NewVMOSVersion.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.ComboBox_NewVMOSVersion.FormattingEnabled = true;
-            this.ComboBox_NewVMOSVersion.Location = new System.Drawing.Point(229, 73);
+            this.ComboBox_NewVMOSVersion.Location = new System.Drawing.Point(163, 73);
             this.ComboBox_NewVMOSVersion.Name = "ComboBox_NewVMOSVersion";
-            this.ComboBox_NewVMOSVersion.Size = new System.Drawing.Size(221, 25);
+            this.ComboBox_NewVMOSVersion.Size = new System.Drawing.Size(233, 24);
             this.ComboBox_NewVMOSVersion.TabIndex = 9;
             this.ComboBox_NewVMOSVersion.SelectedIndexChanged += new System.EventHandler(this.ComboBox_NewVMOSVersion_SelectedIndexChanged);
             // 
@@ -1076,7 +1085,7 @@ namespace MuchosDicenDique
             this.label14.Location = new System.Drawing.Point(5, 0);
             this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(216, 35);
+            this.label14.Size = new System.Drawing.Size(150, 35);
             this.label14.TabIndex = 3;
             this.label14.Text = "Name:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1087,7 +1096,7 @@ namespace MuchosDicenDique
             this.label15.Location = new System.Drawing.Point(5, 35);
             this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(216, 35);
+            this.label15.Size = new System.Drawing.Size(150, 35);
             this.label15.TabIndex = 4;
             this.label15.Text = "OS Type:";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1098,7 +1107,7 @@ namespace MuchosDicenDique
             this.label16.Location = new System.Drawing.Point(5, 70);
             this.label16.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(216, 35);
+            this.label16.Size = new System.Drawing.Size(150, 35);
             this.label16.TabIndex = 5;
             this.label16.Text = "OS Version:";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1109,17 +1118,17 @@ namespace MuchosDicenDique
             this.label17.Location = new System.Drawing.Point(5, 105);
             this.label17.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(216, 35);
+            this.label17.Size = new System.Drawing.Size(150, 35);
             this.label17.TabIndex = 6;
             this.label17.Text = "Location:";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TextBox_NewVMName
             // 
-            this.TextBox_NewVMName.Location = new System.Drawing.Point(229, 3);
+            this.TextBox_NewVMName.Location = new System.Drawing.Point(163, 3);
             this.TextBox_NewVMName.MaxLength = 64;
             this.TextBox_NewVMName.Name = "TextBox_NewVMName";
-            this.TextBox_NewVMName.Size = new System.Drawing.Size(221, 24);
+            this.TextBox_NewVMName.Size = new System.Drawing.Size(233, 22);
             this.TextBox_NewVMName.TabIndex = 7;
             // 
             // ComboBox_NewVMOSType
@@ -1135,19 +1144,20 @@ namespace MuchosDicenDique
             "IBM OS/2",
             "Mac OS X",
             "Other"});
-            this.ComboBox_NewVMOSType.Location = new System.Drawing.Point(229, 38);
+            this.ComboBox_NewVMOSType.Location = new System.Drawing.Point(163, 38);
             this.ComboBox_NewVMOSType.Name = "ComboBox_NewVMOSType";
-            this.ComboBox_NewVMOSType.Size = new System.Drawing.Size(221, 25);
+            this.ComboBox_NewVMOSType.Size = new System.Drawing.Size(233, 24);
             this.ComboBox_NewVMOSType.TabIndex = 8;
             this.ComboBox_NewVMOSType.SelectedIndexChanged += new System.EventHandler(this.ComboBox_NewVMOSType_SelectedIndexChanged);
             // 
             // Button_SelectVMLocation
             // 
             this.Button_SelectVMLocation.Font = new System.Drawing.Font("VCR OSD Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.Button_SelectVMLocation.Location = new System.Drawing.Point(229, 108);
+            this.Button_SelectVMLocation.Location = new System.Drawing.Point(163, 108);
             this.Button_SelectVMLocation.Name = "Button_SelectVMLocation";
-            this.Button_SelectVMLocation.Size = new System.Drawing.Size(221, 32);
+            this.Button_SelectVMLocation.Size = new System.Drawing.Size(233, 32);
             this.Button_SelectVMLocation.TabIndex = 10;
+            this.Button_SelectVMLocation.Text = "[Select Directory]";
             this.Button_SelectVMLocation.UseVisualStyleBackColor = true;
             this.Button_SelectVMLocation.Click += new System.EventHandler(this.Button_SelectVMLocation_Click);
             // 
@@ -1167,10 +1177,10 @@ namespace MuchosDicenDique
             // 
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage2.Controls.Add(this.panel6);
-            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1192, 371);
+            this.tabPage2.Size = new System.Drawing.Size(1192, 373);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "List VMs";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1196,14 +1206,14 @@ namespace MuchosDicenDique
             this.DataGridView_VMsList.ColumnHeadersVisible = false;
             this.DataGridView_VMsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DataGridView_VMsList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.AppWorkspace;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridView_VMsList.DefaultCellStyle = dataGridViewCellStyle12;
             this.DataGridView_VMsList.GridColor = System.Drawing.SystemColors.AppWorkspace;
             this.DataGridView_VMsList.Location = new System.Drawing.Point(3, 3);
             this.DataGridView_VMsList.MultiSelect = false;
@@ -1230,7 +1240,7 @@ namespace MuchosDicenDique
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Width = 400;
+            this.dataGridViewTextBoxColumn1.Width = 1150;
             // 
             // Form1
             // 
@@ -1239,7 +1249,7 @@ namespace MuchosDicenDique
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("VCR OSD Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("VCR OSD Mono", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1352,9 +1362,9 @@ namespace MuchosDicenDique
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button Button_CreateVM;
         private System.Windows.Forms.DataGridView DataGridView_LogPanel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.DataGridView DataGridView_VMsList;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

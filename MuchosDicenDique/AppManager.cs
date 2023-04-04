@@ -5,10 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using HtmlAgilityPack;
 using Microsoft.WindowsAPICodePack.Net;
 
@@ -122,63 +122,97 @@ namespace MuchosDicenDique
             for (int i = 0; i < returnArr.Length; i++) { returnArr[i] = m[i].Groups[1].Value; }
             return returnArr;
         }
-        void WriteToDataGridView(DataGridView _logPanel, string _s) { _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add(_s); })); }
+        public bool VMExists(string _name) { return ListAllVMs().Where(vmName => vmName == _name).Any(); }
+        public void DisplayVMList(DataGridView _vmPanel)
+        {
+            _vmPanel.Rows.Clear();
+            foreach (string name in ListAllVMs()) { _vmPanel.Rows.Add(name); }
+        }
+        long GetOnlineFileSize(string _url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
+            request.Method = "HEAD";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            long size = response.ContentLength;
+            response.Close();
+            return size;
+        }
+        long GetLocalFileSize(string _path) { return File.Exists(_path) ? new FileInfo(_path).Length : 0; }
+        void DownloadISO(string _baseRoute, string _osType, string _ideOsType, ref string _ideRoute, DataGridView _logPanel)
+        {
+            if (_ideOsType != "")
+            {
+                _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add("Looking for latest ISO..."); }));
+                string url = "";
+                string filename = "";
+                switch (_ideOsType)
+                {
+                    // Debian
+                    case "Debian (64-bit)":
+                        {
+                            url = "https://ftp.caliu.cat/debian-cd/current/amd64/iso-cd/";
+                            HtmlWeb web = new HtmlWeb();
+                            HtmlAgilityPack.HtmlDocument doc = web.Load(url);
+                            HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            for (int i = 0; i < nodes.Length && string.IsNullOrEmpty(filename); i++) { if (nodes[i].InnerText == "SHA512SUMS.sign") { filename = nodes[i + 1].InnerText; } }
+                        }
+                        break;
+                    // Ubuntu
+                    case "Ubuntu (64-bit)":
+                        {
+                            url = "https://ftp.caliu.cat/ubuntu-cd/";
+                            HtmlWeb web = new HtmlWeb();
+                            HtmlAgilityPack.HtmlDocument doc = web.Load(url);
+                            HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            string baseUrl = url;
+                            for (int i = 0; i < nodes.Length; i++)
+                            {
+                                Match m = Regex.Match(nodes[i].InnerText, @"(\d+(?:\.\d+){0,2})");
+                                if (m.Success) { url = baseUrl + m.Value + "/"; }
+                            }
+                            doc = web.Load(url);
+                            nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            for (int i = 0; i < nodes.Length && string.IsNullOrEmpty(filename); i++) { if (nodes[i].InnerText == "SHA256SUMS.gpg") { filename = nodes[i + 1].InnerText; } }
+                        }
+                        break;
+                }
+                if (!(string.IsNullOrWhiteSpace(url) || string.IsNullOrWhiteSpace(filename)))
+                {
+                    url += filename;
+                    _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add("Latest ISO found!"); }));
+                    string ideFolder = $"{_baseRoute}\\{_osType}";
+                    _ideRoute = $"{ideFolder}\\{filename}";
+                    if (!File.Exists(_ideRoute))
+                    {
+                        _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add("Downloading ISO..."); }));
+                        int rowIndex = 0;
+                        _logPanel.Invoke((Action)(() => { rowIndex = _logPanel.Rows.Count - 1; }));
+                        if (!Directory.Exists(ideFolder)) { Directory.CreateDirectory(ideFolder); }
+                        WebClient wc = new WebClient();
+                        string ideRouteCopy = _ideRoute;
+                        long totalSize = GetOnlineFileSize(url);
+                        int n = 0;
+                        wc.DownloadProgressChanged += delegate
+                        {
+                            n++;
+                            _logPanel.Invoke((Action)(() =>
+                            {
+                                _logPanel.Rows.RemoveAt(rowIndex);
+                                _logPanel.Rows.Insert(rowIndex, $"Downloading ISO... [{(100.0 * GetLocalFileSize(ideRouteCopy) / totalSize).ToString("0.00")}%]");
+                            }));
+                        };
+                        Task dwTask = wc.DownloadFileTaskAsync(new Uri(url), _ideRoute);
+                        dwTask.Wait();
+                        _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add((_logPanel, "ISO downloaded successfully!")); }));
+                    }
+                }
+                else { _logPanel.Rows.Add("ISO not found, no IDE will be installed."); }
+            }
+        }
         public void CreateVM(string _baseRoute, string _name, string _osType, int _diskMemory, string _diskType, string _diskRoute, string _ideRoute, string _ideOsType, int _memory, int _cores, string _gfxController, int _gfxMemory, string _netController, bool _startVM, DataGridView _logPanel)
         {
             _logPanel.Rows.Clear();
-            // Get IDE ISO From Mirror
-            Task isoTask = Task.Factory.StartNew(() =>
-            {
-                if (_ideOsType != "")
-                {
-                    WriteToDataGridView(_logPanel, "Looking for latest ISO...");
-                    string url = "";
-                    string filename = "";
-                    switch (_ideOsType)
-                    {
-                        // Debian
-                        case "Debian (64-bit)":
-                            {
-                                url = "https://ftp.caliu.cat/debian-cd/current/amd64/iso-cd/";
-                                HtmlWeb web = new HtmlWeb();
-                                HtmlAgilityPack.HtmlDocument doc = web.Load(url);
-                                HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
-                                for (int i = 0; i < nodes.Length && string.IsNullOrEmpty(filename); i++) { if (nodes[i].InnerText == "SHA512SUMS.sign") { filename = nodes[i + 1].InnerText; } }
-                            }
-                            break;
-                        // Ubuntu
-                        case "Ubuntu (64-bit)":
-                            {
-                                url = "https://ftp.caliu.cat/ubuntu-cd/";
-                                HtmlWeb web = new HtmlWeb();
-                                HtmlAgilityPack.HtmlDocument doc = web.Load(url);
-                                HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
-                                string baseUrl = url;
-                                for (int i = 0; i < nodes.Length; i++)
-                                {
-                                    Match m = Regex.Match(nodes[i].InnerText, @"(\d+(?:\.\d+){0,2})");
-                                    if (m.Success) { url = baseUrl + m.Value + "/"; }
-                                }
-                                doc = web.Load(url);
-                                nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
-                                for (int i = 0; i < nodes.Length && string.IsNullOrEmpty(filename); i++) { if (nodes[i].InnerText == "SHA256SUMS.gpg") { filename = nodes[i + 1].InnerText; } }
-                            }
-                            break;
-                    }
-                    if (url != "")
-                    {
-                        WriteToDataGridView(_logPanel, "Latest ISO found!");
-                        _ideRoute = $"{_baseRoute}\\{_osType}\\{filename}";
-                        if (!File.Exists(_ideRoute))
-                        {
-                            WriteToDataGridView(_logPanel, "Downloading ISO...");
-                            using (WebClient wc = new WebClient()) { wc.DownloadFile(url, _ideRoute); }
-                            WriteToDataGridView(_logPanel, "ISO downloaded successfully!");
-                        }
-                    }
-                    else { _logPanel.Rows.Add("ISO not found, no IDE will be installed."); }
-                }
-            });
+            Task isoTask = Task.Factory.StartNew(() => { DownloadISO(_baseRoute, _osType, _ideOsType, ref _ideRoute, _logPanel); });
             // Create New VM
             _logPanel.Rows.Add("Creating new VM...");
             RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{_osType}\" --register --basefolder \"{_baseRoute}\"");
@@ -243,7 +277,7 @@ namespace MuchosDicenDique
             RunVBoxCommand($"storagectl \"{_name}\" --name \"IDE Controller\" --add ide --controller PIIX4");
             _logPanel.Rows.Add("IDE port added successfully!");
             // Wait For ISO Task
-            isoTask.Wait();
+            while (!(isoTask.IsCompleted || isoTask.IsCanceled || isoTask.IsFaulted)) { Application.DoEvents(); }
             if (!string.IsNullOrEmpty(_ideRoute))
             {
                 // Attach ISO
@@ -264,11 +298,6 @@ namespace MuchosDicenDique
                 _logPanel.Rows.Add("VM booted successfully!");
             }
             _logPanel.Rows.Add("All done!");
-        }
-        public void DisplayVMList(DataGridView _vmPanel)
-        {
-            _vmPanel.Rows.Clear();
-            foreach (string name in ListAllVMs()) { _vmPanel.Rows.Add(name); }
         }
         #endregion
     }
