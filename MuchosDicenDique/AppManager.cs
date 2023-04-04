@@ -191,10 +191,8 @@ namespace MuchosDicenDique
                         WebClient wc = new WebClient();
                         string ideRouteCopy = _ideRoute;
                         long totalSize = GetOnlineFileSize(url);
-                        int n = 0;
                         wc.DownloadProgressChanged += delegate
                         {
-                            n++;
                             _logPanel.Invoke((Action)(() =>
                             {
                                 _logPanel.Rows.RemoveAt(rowIndex);

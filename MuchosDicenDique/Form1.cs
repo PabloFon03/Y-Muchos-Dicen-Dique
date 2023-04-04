@@ -403,7 +403,6 @@ namespace MuchosDicenDique
             fileDialog.Filter = "VirtualBox Disk Image Files|*.vdi|Virtual Hard Disk Files|*.vhd|Virtual Machine Disk Files|*.vmdk";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine(fileDialog.FileName);
                 vmDiskPath = fileDialog.FileName;
                 Button_SelectVMDisk.Text = TruncatePath(vmDiskPath);
             }
@@ -422,7 +421,6 @@ namespace MuchosDicenDique
             fileDialog.Filter = "ISO Disk Image Files|*.iso";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine(fileDialog.FileName);
                 vmIdePath = fileDialog.FileName;
                 Button_SelectExistingIDE.Text = TruncatePath(vmIdePath);
             }
