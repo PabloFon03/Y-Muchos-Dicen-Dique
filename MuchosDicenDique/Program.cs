@@ -13,7 +13,9 @@ namespace MuchosDicenDique
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form1 form = new Form1();
+            form.Icon = new System.Drawing.Icon("cool.ico");
+            Application.Run(form);
         }
     }
 }

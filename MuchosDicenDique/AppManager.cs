@@ -5,7 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using HtmlAgilityPack;
 using Microsoft.WindowsAPICodePack.Net;
 
 namespace MuchosDicenDique
@@ -22,6 +26,7 @@ namespace MuchosDicenDique
             LoadVirtualBoxVersion();
             LoadNetworkData();
         }
+        #region [Entrega 1]
         void LoadVirtualBoxVersion()
         {
             virtualBoxVersion = "N/A";
@@ -94,5 +99,204 @@ namespace MuchosDicenDique
             return networks.Length > 0 ? networks[0] : "---";
         }
         public bool IsConnectedViaEthernet() { return ethernetConnection; }
+        #endregion
+        #region [Entrega 2]
+        string RunVBoxCommand(string _cmd)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo(@"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe", _cmd);
+            psi.RedirectStandardOutput = true;
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            Process process = new Process();
+            process.StartInfo = psi;
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            return output;
+        }
+        string[] ListAllVMs()
+        {
+            string result = RunVBoxCommand("list vms");
+            MatchCollection m = Regex.Matches(result, '"' + "(.+)" + '"');
+            string[] returnArr = new string[m.Count];
+            for (int i = 0; i < returnArr.Length; i++) { returnArr[i] = m[i].Groups[1].Value; }
+            return returnArr;
+        }
+        public bool VMExists(string _name) { return ListAllVMs().Where(vmName => vmName == _name).Any(); }
+        public void DisplayVMList(DataGridView _vmPanel)
+        {
+            _vmPanel.Rows.Clear();
+            foreach (string name in ListAllVMs()) { _vmPanel.Rows.Add(name); }
+        }
+        long GetOnlineFileSize(string _url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
+            request.Method = "HEAD";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            long size = response.ContentLength;
+            response.Close();
+            return size;
+        }
+        long GetLocalFileSize(string _path) { return File.Exists(_path) ? new FileInfo(_path).Length : 0; }
+        void DownloadISO(string _baseRoute, string _osType, string _ideOsType, ref string _ideRoute, DataGridView _logPanel)
+        {
+            if (_ideOsType != "")
+            {
+                _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add("Looking for latest ISO..."); }));
+                string url = "";
+                string filename = "";
+                switch (_ideOsType)
+                {
+                    // Debian
+                    case "Debian (64-bit)":
+                        {
+                            url = "https://ftp.caliu.cat/debian-cd/current/amd64/iso-cd/";
+                            HtmlWeb web = new HtmlWeb();
+                            HtmlAgilityPack.HtmlDocument doc = web.Load(url);
+                            HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            for (int i = 0; i < nodes.Length && string.IsNullOrEmpty(filename); i++) { if (nodes[i].InnerText == "SHA512SUMS.sign") { filename = nodes[i + 1].InnerText; } }
+                        }
+                        break;
+                    // Ubuntu
+                    case "Ubuntu (64-bit)":
+                        {
+                            url = "https://ftp.caliu.cat/ubuntu-cd/";
+                            HtmlWeb web = new HtmlWeb();
+                            HtmlAgilityPack.HtmlDocument doc = web.Load(url);
+                            HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            string baseUrl = url;
+                            for (int i = 0; i < nodes.Length; i++)
+                            {
+                                Match m = Regex.Match(nodes[i].InnerText, @"(\d+(?:\.\d+){0,2})");
+                                if (m.Success) { url = baseUrl + m.Value + "/"; }
+                            }
+                            doc = web.Load(url);
+                            nodes = doc.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                            for (int i = 0; i < nodes.Length && string.IsNullOrEmpty(filename); i++) { if (nodes[i].InnerText == "SHA256SUMS.gpg") { filename = nodes[i + 1].InnerText; } }
+                        }
+                        break;
+                }
+                if (!(string.IsNullOrWhiteSpace(url) || string.IsNullOrWhiteSpace(filename)))
+                {
+                    url += filename;
+                    _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add("Latest ISO found!"); }));
+                    string ideFolder = $"{_baseRoute}\\{_osType}";
+                    _ideRoute = $"{ideFolder}\\{filename}";
+                    if (!File.Exists(_ideRoute))
+                    {
+                        _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add("Downloading ISO..."); }));
+                        int rowIndex = 0;
+                        _logPanel.Invoke((Action)(() => { rowIndex = _logPanel.Rows.Count - 1; }));
+                        if (!Directory.Exists(ideFolder)) { Directory.CreateDirectory(ideFolder); }
+                        WebClient wc = new WebClient();
+                        string ideRouteCopy = _ideRoute;
+                        long totalSize = GetOnlineFileSize(url);
+                        wc.DownloadProgressChanged += delegate
+                        {
+                            _logPanel.Invoke((Action)(() =>
+                            {
+                                _logPanel.Rows.RemoveAt(rowIndex);
+                                _logPanel.Rows.Insert(rowIndex, $"Downloading ISO... [{(100.0 * GetLocalFileSize(ideRouteCopy) / totalSize).ToString("0.00")}%]");
+                            }));
+                        };
+                        Task dwTask = wc.DownloadFileTaskAsync(new Uri(url), _ideRoute);
+                        dwTask.Wait();
+                        _logPanel.Invoke((Action)(() => { _logPanel.Rows.Add((_logPanel, "ISO downloaded successfully!")); }));
+                    }
+                }
+                else { _logPanel.Rows.Add("ISO not found, no IDE will be installed."); }
+            }
+        }
+        public void CreateVM(string _baseRoute, string _name, string _osType, int _diskMemory, string _diskType, string _diskRoute, string _ideRoute, string _ideOsType, int _memory, int _cores, string _gfxController, int _gfxMemory, string _netController, bool _startVM, DataGridView _logPanel)
+        {
+            _logPanel.Rows.Clear();
+            Task isoTask = Task.Factory.StartNew(() => { DownloadISO(_baseRoute, _osType, _ideOsType, ref _ideRoute, _logPanel); });
+            // Create New VM
+            _logPanel.Rows.Add("Creating new VM...");
+            RunVBoxCommand($"createvm --name \"{_name}\" --ostype \"{_osType}\" --register --basefolder \"{_baseRoute}\"");
+            _logPanel.Rows.Add("VM created successfully!");
+            // Enable I/O APIC
+            _logPanel.Rows.Add("Enabling I/O APIC...");
+            RunVBoxCommand($"modifyvm \"{_name}\" --ioapic on");
+            _logPanel.Rows.Add("I/O APIC enabled successfully!");
+            // Set CPU Cores
+            _logPanel.Rows.Add($"Settings CPU cores ({_cores})...");
+            RunVBoxCommand($"modifyvm \"{_name}\" --cpus {_cores}");
+            _logPanel.Rows.Add("CPU cores set!");
+            // Set RAM Memory
+            _logPanel.Rows.Add($"Settings RAM Memory ({_memory}MB)...");
+            RunVBoxCommand($"modifyvm \"{_name}\" --memory {_memory}");
+            _logPanel.Rows.Add($"RAM Memory set successfully!");
+            // Set Video RAM Memory
+            _logPanel.Rows.Add($"Settings Video RAM Memory ({_gfxMemory}MB)...");
+            RunVBoxCommand($"modifyvm \"{_name}\" --vram {_gfxMemory}");
+            _logPanel.Rows.Add($"Video RAM Memory set successfully!");
+            // Set GFX Controller
+            _logPanel.Rows.Add("Configuring graphics controller...");
+            RunVBoxCommand($"modifyvm \"{_name}\" --graphicscontroller {_gfxController}");
+            _logPanel.Rows.Add("Graphics controller configured successfully!");
+            // Set Net Controller
+            _logPanel.Rows.Add("Configuring network controller...");
+            RunVBoxCommand($"modifyvm \"{_name}\" --nic1 {_netController}");
+            _logPanel.Rows.Add("Network controller configured successfully!");
+            // Create Hard Disk Port
+            _logPanel.Rows.Add("Adding hard disk port...");
+            RunVBoxCommand($"storagectl \"{_name}\" --name \"SATA Controller\" --add sata --controller IntelAhci");
+            _logPanel.Rows.Add("Hard disk port added successfully!");
+            if (string.IsNullOrEmpty(_diskRoute))
+            {
+                if (_diskMemory > 0)
+                {
+                    string diskRoute = $"{_baseRoute}\\{_name}\\{_name}_DISK.{_diskType.ToLower()}";
+                    // Create Hard Disk
+                    _logPanel.Rows.Add("Creating new hard disk...");
+                    RunVBoxCommand($"createmedium disk --filename {diskRoute} --size {_diskMemory} --format {_diskType}");
+                    _logPanel.Rows.Add("New hard disk created successfully!");
+                    // Attach Hard Disk
+                    _logPanel.Rows.Add("Installing new hard disk...");
+                    RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {diskRoute}");
+                    _logPanel.Rows.Add("New hard disk installed successfully!");
+                }
+                else { _logPanel.Rows.Add("[Do Nothing] selected. No hard disk will be installed."); }
+            }
+            else
+            {
+                // Create Hard Disk Port
+                _logPanel.Rows.Add("Adding SATA port...");
+                RunVBoxCommand($"storagectl \"{_name}\" --name \"SATA Controller\"--add sata --controller IntelAhci");
+                _logPanel.Rows.Add("SATA port added successfully");
+                // Attach Hard Disk
+                _logPanel.Rows.Add("Installing existing hard disk...");
+                RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {_diskRoute}");
+                _logPanel.Rows.Add("Existing hard disk installed successfully!");
+            }
+            // Create IDE
+            _logPanel.Rows.Add("Adding IDE port...");
+            RunVBoxCommand($"storagectl \"{_name}\" --name \"IDE Controller\" --add ide --controller PIIX4");
+            _logPanel.Rows.Add("IDE port added successfully!");
+            // Wait For ISO Task
+            while (!(isoTask.IsCompleted || isoTask.IsCanceled || isoTask.IsFaulted)) { Application.DoEvents(); }
+            if (!string.IsNullOrEmpty(_ideRoute))
+            {
+                // Attach ISO
+                _logPanel.Rows.Add("Installing IDE ISO...");
+                RunVBoxCommand($"storageattach \"{_name}\" --storagectl \"IDE Controller\" --port 1 --device 0 --type dvddrive --medium {_ideRoute}");
+                _logPanel.Rows.Add("IDE ISO installed successfully!");
+            }
+            else { _logPanel.Rows.Add("[Do Nothing] selected. No IDE will be installed."); }
+            // Boot Settings
+            _logPanel.Rows.Add("Configuring boot settings...");
+            RunVBoxCommand($"modifyvm \"{_name}\" --boot1 dvd --boot2 disk --boot3 none --boot4 none");
+            _logPanel.Rows.Add("Boot settings configured successfully!");
+            // Start VM
+            if (_startVM)
+            {
+                _logPanel.Rows.Add("Booting up VM...");
+                RunVBoxCommand($"startvm \"{_name}\"");
+                _logPanel.Rows.Add("VM booted successfully!");
+            }
+            _logPanel.Rows.Add("All done!");
+        }
+        #endregion
     }
 }
